@@ -1,6 +1,9 @@
 from flask import render_template, abort
 from jinja2 import TemplateNotFound
 from silsannotate import app
+from flask.ext.assets import Environment, Bundle
+
+assets = Environment(app)
 
 
 @app.route('/')
