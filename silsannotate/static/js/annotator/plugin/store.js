@@ -46,7 +46,8 @@ Annotator.Plugin.Store = (function(_super) {
 
   Store.prototype._getAnnotations = function() {
     if (this.options.loadFromSearch) {
-      return this.loadAnnotationsFromSearch(this.options.loadFromSearch);
+      annotations = this.loadAnnotationsFromSearch(this.options.loadFromSearch);
+      return annotations
     } else {
       return this.loadAnnotations();
     }

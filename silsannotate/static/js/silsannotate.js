@@ -19,4 +19,6 @@ $(document).ready(function(){
         }
     });
 
+    content.annotator('addPlugin', "Scrollbar")
+
 })

@@ -95,7 +95,8 @@ Annotator = (function(_super) {
     this.showViewer = __bind(this.showViewer, this);
     this.onEditorSubmit = __bind(this.onEditorSubmit, this);
     this.onEditorHide = __bind(this.onEditorHide, this);
-    this.showEditor = __bind(this.showEditor, this);    Annotator.__super__.constructor.apply(this, arguments);
+    this.showEditor = __bind(this.showEditor, this);
+    Annotator.__super__.constructor.apply(this, arguments);
     this.plugins = {};
     if (!Annotator.supported()) return this;
     if (!this.options.readOnly) this._setupDocumentEvents();
@@ -268,7 +269,7 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.loadAnnotations = function(annotations) {
-    var clone, loader,
+      var clone, loader,
       _this = this;
     if (annotations == null) annotations = [];
     loader = function(annList) {
