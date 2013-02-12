@@ -1,4 +1,9 @@
 $(document).ready(function(){
+    // prep the scrollbar:
+    $("body").append("<div id='scrollbar'></div>")
+    scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
+
+
     var textId = window.location.pathname.split("/")[2]
     var content = $(document.body).annotator();
     content.annotator('addPlugin', 'Store', {

@@ -8,17 +8,25 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
     Scrollbar.prototype.events = {
         'annotationsLoaded': 'updateScrollbar'
+//        ,'annotationCreated': 'updateScrollbar'
     };
 
     function Scrollbar(element, options) {
         this.updateScrollbar = __bind(this.updateScrollbar, this);
         Scrollbar.__super__.constructor.apply(this, arguments);
-        console.log("well, that just happened.")
     }
 
     Scrollbar.prototype.updateScrollbar = function(annotations) {
         $("span.annotator-hl").each(function(){
-            console.log($(this).offset())
+            var elem$ = $(this)
+            $("<div class='scrollbar-block'></div>")
+                .css(
+                    {
+                    top: (elem$.offset().top * scrollbarScaleFactor) +"px",
+                    height: (elem$.height() * scrollbarScaleFactor) + "px"
+                    }
+                )
+                .appendTo("#scrollbar")
         })
 
     };
