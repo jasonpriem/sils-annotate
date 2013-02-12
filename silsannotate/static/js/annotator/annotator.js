@@ -405,7 +405,10 @@ Annotator = (function(_super) {
         container = $(container).parents('[class^=annotator-hl]')[0];
         console.log("parent of highlighting: ", container)
       }
-      if (this.isAnnotator(container)) return;
+      if (this.isAnnotator(container)) {
+          console.log("isAnnotator(container) returned true, but pressing on.")
+//          return;
+      }
     }
     if (event && this.selectedRanges.length) {
       return this.adder.css(util.mousePosition(event, this.wrapper[0])).show();
