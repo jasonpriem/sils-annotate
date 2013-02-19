@@ -33,6 +33,11 @@ Annotator.Widget = (function(_super) {
       right: offset.left + widget.width()
     };
     if ((current.top - viewport.top) < 0) this.invertY();
+
+    // just invert y no matter what:
+    this.invertY()
+
+
     if ((current.right - viewport.right) > 0) this.invertX();
     return this;
   };
