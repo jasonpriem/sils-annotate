@@ -55,7 +55,7 @@ Annotator = (function(_super) {
   Annotator.prototype.events = {
     ".annotator-adder button click": "onAdderClick",
     ".annotator-adder button mousedown": "onAdderMousedown",
-    ".annotator-hl mouseover": "onHighlightMouseover",
+    "p mouseover": "onHighlightMouseover",
     ".annotator-hl mouseout": "startViewerHideTimer"
   };
 
@@ -103,6 +103,14 @@ Annotator = (function(_super) {
     this._setupWrapper()._setupViewer()._setupEditor();
     this._setupDynamicStyle();
     this.adder = $(this.html.adder).appendTo(this.wrapper).hide();
+
+//
+//   $("html").click(function(){
+//       console.log("click!")
+//       if (!$(this).hasClass("annotator-editor")) {
+//           $("a.annotator-cancel").trigger("click")
+//       }
+//   })
   }
 
   Annotator.prototype._setupWrapper = function() {
@@ -369,15 +377,13 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.showViewer = function(annotations, location) {
-    this.viewer.element.css(location);
+//    this.viewer.element.css(location);
     this.viewer.load(annotations);
     return this.publish('annotationViewerShown', [this.viewer, annotations]);
   };
 
   Annotator.prototype.startViewerHideTimer = function() {
-    if (!this.viewerHideTimer) {
-      return this.viewerHideTimer = setTimeout(this.viewer.hide, 250);
-    }
+    this.viewer.hide()
   };
 
   Annotator.prototype.clearViewerHideTimer = function() {
@@ -412,7 +418,10 @@ Annotator = (function(_super) {
       }
     }
     if (event && this.selectedRanges.length) {
-      return this.adder.css(util.mousePosition(event, this.wrapper[0])).show();
+      return this.adder.css(util.mousePosition(event, this.wrapper[0]))
+          .show()
+          .find("button")
+          .trigger("click");
     } else {
       return this.adder.hide();
     }
@@ -423,14 +432,26 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.onHighlightMouseover = function(event) {
-    var annotations;
-    this.clearViewerHideTimer();
+    var annotations, containingP$;
+//    this.clearViewerHideTimer();
     if (this.mouseIsDown || this.viewer.isShown()) return false;
-    annotations = $(event.target).parents('.annotator-hl').andSelf().map(function() {
+
+    if (event.target.tagName.toLowerCase() == "p") {
+        containingP$ = $(event.target)
+    }
+    else {
+        containingP$ = $(event.target).parents("p")
+    }
+
+    annotations = containingP$.find('.annotator-hl').map(function() {
       return $(this).data("annotation");
     });
     return this.showViewer($.makeArray(annotations), util.mousePosition(event, this.wrapper[0]));
   };
+
+
+
+
 
   Annotator.prototype.onAdderMousedown = function(event) {
     if (event != null) event.preventDefault();
