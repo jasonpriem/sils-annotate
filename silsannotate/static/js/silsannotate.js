@@ -1,6 +1,6 @@
 $(document).ready(function(){
     // prep the scrollbar:
-    $("body").append("<div id='filmstrip'></div>")
+    $("<div id='filmstrip'></div>").appendTo("body")
     $("body").append("<div id='scrollbar'></div>")
     scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
 

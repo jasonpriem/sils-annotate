@@ -1,9 +1,25 @@
 body {
-  width: 600px;
-  float: right;
-  margin: 50px 480px 50px 0;
   line-height: 1.2;
   background: #fafafa;
+  margin: 0;
+}
+body div.annotator-wrapper {
+  display: table-row;
+}
+div#jr-content {
+  float: right;
+  display: table-cell;
+  height: 100%;
+  margin-top: 50px;
+}
+div#jr-content article {
+  float: right;
+  width: 600px;
+  margin-right: 50px;
+}
+div#jr-content article img {
+  width: 20px;
+  height: 20px;
 }
 #scrollbar {
   width: 30px;
@@ -22,13 +38,11 @@ body {
 }
 #filmstrip {
   width: 400px;
-  position: fixed;
-  top: 0;
-  right: 30px;
-  bottom: 0;
   background: #fff;
   border-left: 1px solid #ddd;
   box-shadow: 0px 0px 15px #000;
+  display: table-cell;
+  height: 100%;
 }
 .annotator-viewer {
   position: fixed;
