@@ -1,6 +1,5 @@
 body {
   line-height: 1.2;
-  background: #fafafa;
 }
 body div.annotator-wrapper {
   width: 600px;
@@ -63,6 +62,15 @@ body div.annotator-wrapper span.annotator-hl.active {
   font-family: verdana, sans-serif;
   color: #444;
   font-size: 11px;
+}
+#lens {
+  background: #fff;
+  width: 25px;
+  position: fixed;
+  right: 430px;
+  top: 0;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
 }
 .annotator-viewer {
   position: fixed;

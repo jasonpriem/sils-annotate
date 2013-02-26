@@ -18,8 +18,17 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
     Scrollbar.prototype.updateScrollbar = function(annotations) {
         var numAnnotations
+        var lastScrollTop = 0
         var annoWindow = {top: 200, bottom: 400}
         numAnnotations = annotations.length
+
+        $("<div id='lens'></div>").css(
+            {
+                top: annoWindow.top + "px",
+                height: (annoWindow.bottom - annoWindow.top) + "px"
+            }
+        )
+            .appendTo("body")
 
         var changeHighlightBackgrounds = function(anno, active) {
             var numHighlights = anno.highlights.length
@@ -34,33 +43,44 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             }
         }
 
-        var renderAnno = function(anno) {
-            var annoLi$ = $('<li class="sils-anno"><span class="text"></span></li>')
+        var renderAnno = function(anno, scrollDir) {
+            var annoLi$ = $('<li class="sils-anno ' + anno._id + '"><span class="text"></span></li>')
             var userIconUrl = "/static/img/users/" + anno.userId + ".jpg"
             var userIcon = '<img src="'+ userIconUrl +'">'
             annoLi$.prepend(userIcon)
             annoLi$.find("span.text").append(anno.text)
-            annoLi$.appendTo("#filmstrip ul.main")
+            if (scrollDir == "down"){
+                annoLi$.appendTo("#filmstrip ul.main")
+            }
+            else if (scrollDir == "up") {
+                annoLi$.prependTo("#filmstrip ul.main")
+            }
 
         }
 
-        var addAnnoToPane = function(anno) {
+        var addAnnoToPane = function(anno, scrollDir) {
             if (anno.active == true) {
                 return true
             }
             else {
-                renderAnno(anno)
+                renderAnno(anno, scrollDir)
                 anno.active = true
             }
         }
 
-        var removeAnnoFromPane = function(anno) {
+        var removeAnnoFromPane = function(anno, scrollDir) {
             if (!anno.active) {
                 return false
             }
             else {
-                console.log("remove this anno from the panel!", anno)
-                anno.active == false
+                if (scrollDir == "down") {
+                    $("#filmstrip li." + anno._id).remove()
+                }
+                else if (scrollDir == "up") {
+                    $("#filmstrip li." + anno._id).remove()
+
+                }
+                anno.active = false
             }
         }
 
@@ -75,18 +95,21 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         $(window).scroll(function() {
             var scrollTop = $(document).scrollTop()
+            var scrollDir = (lastScrollTop - scrollTop > 0) ? "up" : "down"
+
             for (var i=0; i < numAnnotations; i++ ){
                 var thisAnno =  annotations[i]
                 var topPosition = thisAnno.offsetTop - scrollTop
                 var bottomPosition = thisAnno.offsetBottom - scrollTop
 
                 if (bottomPosition > annoWindow.top && topPosition < annoWindow.bottom) {
-                    addAnnoToPane(thisAnno)
+                    addAnnoToPane(thisAnno, scrollDir)
                 }
                 else {
-                    removeAnnoFromPane(thisAnno)
+                    removeAnnoFromPane(thisAnno, scrollDir)
                 }
             }
+            lastScrollTop = scrollTop
         })
 
 
