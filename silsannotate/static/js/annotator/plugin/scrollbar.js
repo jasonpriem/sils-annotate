@@ -17,7 +17,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
     }
 
     Scrollbar.prototype.updateScrollbar = function(annotations) {
-        var annotations
+        var annos
+        $.each(annotations, function(){
+            this.pos
+        })
+
         $("span.annotator-hl").each(function(){
             var elem$ = $(this)
             console.log("annotation", elem$.data("annotation"))
