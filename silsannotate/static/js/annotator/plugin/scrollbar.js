@@ -17,6 +17,23 @@ Annotator.Plugin.Scrollbar = (function(_super) {
     }
 
     Scrollbar.prototype.updateScrollbar = function(annotations) {
+        var numAnnotations
+        numAnnotations = annotations.length
+
+
+        for (var i=0; i < numAnnotations; i++ ){
+            var thisAnno = annotations[i]
+            thisAnno.offsetTop = $(thisAnno.highlights[0]).offset().top
+            var annoBottom$ = $(_.last(thisAnno.highlights))
+            thisAnno.offsetBottom = annoBottom$.offset().top
+                + annoBottom$.height()
+        }
+
+        $(window).scroll(function() {
+        })
+
+
+
         $("span.annotator-hl").each(function(){
             var elem$ = $(this)
             $("<div class='scrollbar-block'></div>")
