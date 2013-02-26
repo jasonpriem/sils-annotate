@@ -18,7 +18,21 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
     Scrollbar.prototype.updateScrollbar = function(annotations) {
         var numAnnotations
+        var annoWindow = {top: 200, bottom: 400}
         numAnnotations = annotations.length
+
+        var changeHighlightBackgrounds = function(anno, active) {
+            var numHighlights = anno.highlights.length
+            var activeClass = "active"
+            for (var i=0; i < numHighlights; i++ ) {
+                if (active) {
+                    $(anno.highlights[i]).addClass(activeClass)
+                }
+                else {
+                    $(anno.highlights[i]).removeClass(activeClass)
+                }
+            }
+        }
 
 
         for (var i=0; i < numAnnotations; i++ ){
@@ -30,6 +44,19 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         }
 
         $(window).scroll(function() {
+            var scrollTop = $(document).scrollTop()
+            for (var i=0; i < numAnnotations; i++ ){
+                var thisAnno =  annotations[i]
+                var topPosition = thisAnno.offsetTop - scrollTop
+                var bottomPosition = thisAnno.offsetBottom - scrollTop
+
+                if (bottomPosition > annoWindow.top && topPosition < annoWindow.bottom) {
+                    changeHighlightBackgrounds(thisAnno, true)
+                }
+                else {
+                    changeHighlightBackgrounds(thisAnno, false)
+                }
+            }
         })
 
 
