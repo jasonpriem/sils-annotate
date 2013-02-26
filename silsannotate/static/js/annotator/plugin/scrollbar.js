@@ -34,6 +34,36 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             }
         }
 
+        var renderAnno = function(anno) {
+            var annoLi$ = $('<li class="sils-anno"><span class="text"></span></li>')
+            var userIconUrl = "/static/img/users/" + anno.userId + ".jpg"
+            var userIcon = '<img src="'+ userIconUrl +'">'
+            annoLi$.prepend(userIcon)
+            annoLi$.find("span.text").append(anno.text)
+            annoLi$.appendTo("#filmstrip ul.main")
+
+        }
+
+        var addAnnoToPane = function(anno) {
+            if (anno.active == true) {
+                return true
+            }
+            else {
+                renderAnno(anno)
+                anno.active = true
+            }
+        }
+
+        var removeAnnoFromPane = function(anno) {
+            if (!anno.active) {
+                return false
+            }
+            else {
+                console.log("remove this anno from the panel!", anno)
+                anno.active == false
+            }
+        }
+
 
         for (var i=0; i < numAnnotations; i++ ){
             var thisAnno = annotations[i]
@@ -51,10 +81,10 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 var bottomPosition = thisAnno.offsetBottom - scrollTop
 
                 if (bottomPosition > annoWindow.top && topPosition < annoWindow.bottom) {
-                    changeHighlightBackgrounds(thisAnno, true)
+                    addAnnoToPane(thisAnno)
                 }
                 else {
-                    changeHighlightBackgrounds(thisAnno, false)
+                    removeAnnoFromPane(thisAnno)
                 }
             }
         })
