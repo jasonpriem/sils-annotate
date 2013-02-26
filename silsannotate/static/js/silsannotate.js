@@ -1,6 +1,6 @@
 $(document).ready(function(){
     // prep the scrollbar:
-    $("<div id='filmstrip'></div>").appendTo("body")
+    $("body").append("<div id='filmstrip'><ul class='main'></ul></div>")
     $("body").append("<div id='scrollbar'></div>")
     scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
 
@@ -29,5 +29,6 @@ $(document).ready(function(){
     });
 
     content.annotator('addPlugin', "Scrollbar")
+
 
 })

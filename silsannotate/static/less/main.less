@@ -1,25 +1,14 @@
 body {
    line-height: 1.2;
-   background: #fafafa;
-   margin: 0;
    div.annotator-wrapper {
-      display:table-row;
-
-   }
-}
-
-div#jr-content {
-   float:right;
-   display:table-cell;
-   height: 100%;
-   margin-top: 50px;
-   article{
+      width: 600px;
       float:right;
-      width:  600px;
-      margin-right: 50px;
-      img {
-         width: 20px;
-         height: 20px;
+      margin:50px 480px 50px 0;
+      span.annotator-hl {
+         background: rgba(255, 255, 10, 0.1);
+         &.active {
+            background: rgba(255, 255, 10, 0.6);
+         }
       }
    }
 }
@@ -44,11 +33,49 @@ div#jr-content {
 
 #filmstrip {
    width: 400px;
+   position: fixed;
+   top:0;
+   right:30px;
+   bottom:0;
    background: #fff;
    border-left:1px solid #ddd;
    box-shadow:  0px 0px 15px #000;
-   display:table-cell;
-   height: 100%;
+   ul.main {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      li {
+         width: 100%;
+         padding: 2px 2px;
+         margin: 0;
+         list-style-type: none;
+         height: 20px;
+         border-bottom: 1px solid #bbb;
+         img {
+            margin-right: 5px;
+            height: 20px;
+            float:left;
+         }
+         span.text {
+            padding-bottom: 4px;
+            float:left;
+            margin-top: 4px;
+            font-family: verdana, sans-serif;
+            color: #444;
+            font-size: 11px;
+         }
+      }
+   }
+}
+
+#lens {
+   background: #fff;
+   width: 25px;
+   position: fixed;
+   right: 430px;
+   top: 0;
+   border-top: 1px solid #999;
+   border-bottom: 1px solid #999;
 }
 
 
