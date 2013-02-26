@@ -1,9 +1,11 @@
 body {
+  line-height: 1.2;
+  background: #fafafa;
+}
+body div.annotator-wrapper {
   width: 600px;
   float: right;
   margin: 50px 480px 50px 0;
-  line-height: 1.2;
-  background: #fafafa;
 }
 #scrollbar {
   width: 30px;

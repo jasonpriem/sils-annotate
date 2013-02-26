@@ -378,8 +378,8 @@ Annotator = (function(_super) {
 
   Annotator.prototype.showViewer = function(annotations, location) {
 //    this.viewer.element.css(location);
-    this.viewer.load(annotations);
-    return this.publish('annotationViewerShown', [this.viewer, annotations]);
+//    this.viewer.load(annotations);
+//    return this.publish('annotationViewerShown', [this.viewer, annotations]);
   };
 
   Annotator.prototype.startViewerHideTimer = function() {
