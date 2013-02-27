@@ -407,7 +407,6 @@ Annotator = (function(_super) {
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       range = _ref[_i];
       container = range.commonAncestor;
-      console.log("first attempt to get container yeilds this:", container)
       if ($(container).hasClass('annotator-hl')) {
         container = $(container).parents('[class^=annotator-hl]')[0];
         console.log("parent of highlighting: ", container)

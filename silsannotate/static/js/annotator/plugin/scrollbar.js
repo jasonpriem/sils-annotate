@@ -8,7 +8,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
     Scrollbar.prototype.events = {
         'annotationsLoaded': 'updateScrollbar'
-//        ,'annotationCreated': 'updateScrollbar'
     };
 
     function Scrollbar(element, options) {
@@ -19,26 +18,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
     Scrollbar.prototype.updateScrollbar = function(annotations) {
         var numAnnotations
         var lastScrollTop = 0
-        var annoWindow = {top: 200, bottom: 400}
+
+        // lens is global on purpose, easier debugging...
+        lens = {top: 200, bottom: 400}
         var viewportHeight = $(window).height()
         numAnnotations = annotations.length
-
-        var shutter$ = $("<div class='lens-shutter'><div class='main'></div></div></div>")
-
-        // insert the shutters that define the lens
-        shutter$.clone().addClass("top").css(
-            "height",
-            (annoWindow.top) + "px"
-        )
-            .append("<img class='bracket' src='../static/img/lens-bracket-top.png'>")
-            .appendTo("body")
-
-        shutter$.clone().addClass("bottom").css(
-                "height",
-                (annoWindow.bottom) + "px"
-        )
-            .append("<img class='bracket' src='../static/img/lens-bracket-bottom.png'>")
-            .appendTo("body")
 
 
 
@@ -47,6 +31,26 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         /***********************************************************************
          * functions
          **********************************************************************/
+
+        var makeShutters = function(lens){
+            var lensHight = lens.bottom - lens.top
+            var shutter$ = $("<div class='lens-shutter'><div class='main'></div></div></div>")
+
+            // insert the shutters that define the lens
+            shutter$.clone().addClass("top").css(
+                    "height",
+                    (lens.top) + "px"
+                )
+                .append("<img class='bracket' src='../static/img/lens-bracket-top.png'>")
+                .appendTo("body")
+
+            shutter$.clone().addClass("bottom").css(
+                    "height",
+                    ($(window).height() - lens.bottom) + "px"
+                )
+                .append("<img class='bracket' src='../static/img/lens-bracket-bottom.png'>")
+                .appendTo("body")
+        }
 
         var changeHighlightBackgrounds = function(anno, active) {
             var numHighlights = anno.highlights.length
@@ -103,6 +107,34 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             }
         }
 
+        var onScroll = function() {
+            var scrollTop = $(document).scrollTop()
+            var scrollDir = (lastScrollTop - scrollTop > 0) ? "up" : "down"
+
+            for (var i=0; i < numAnnotations; i++ ){
+                var thisAnno =  annotations[i]
+                var topPosition = thisAnno.offsetTop - scrollTop
+                var bottomPosition = thisAnno.offsetBottom - scrollTop
+
+                if (bottomPosition > lens.top && topPosition < lens.bottom) {
+                    addAnnoToPane(thisAnno, scrollDir)
+                }
+                else {
+                    removeAnnoFromPane(thisAnno, scrollDir)
+                }
+            }
+            lastScrollTop = scrollTop
+        }
+
+
+
+
+
+        /***********************************************************************
+         * procedural code
+         **********************************************************************/
+
+        makeShutters(lens)
 
         for (var i=0; i < numAnnotations; i++ ){
             var thisAnno = annotations[i]
@@ -113,22 +145,27 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         }
 
         $(window).scroll(function() {
-            var scrollTop = $(document).scrollTop()
-            var scrollDir = (lastScrollTop - scrollTop > 0) ? "up" : "down"
+            onScroll()
+        })
 
-            for (var i=0; i < numAnnotations; i++ ){
-                var thisAnno =  annotations[i]
-                var topPosition = thisAnno.offsetTop - scrollTop
-                var bottomPosition = thisAnno.offsetBottom - scrollTop
 
-                if (bottomPosition > annoWindow.top && topPosition < annoWindow.bottom) {
-                    addAnnoToPane(thisAnno, scrollDir)
-                }
-                else {
-                    removeAnnoFromPane(thisAnno, scrollDir)
-                }
-            }
-            lastScrollTop = scrollTop
+        $("div.annotator-wrapper").click(function(e){
+            console.log("from .annotator-wrapper click handler, lens:", lens)
+
+            var lensHeight = lens.bottom - lens.top
+
+            if (typeof e.clientY === "undefined") return true
+            if (!$(".annotator-editor").hasClass("annotator-hide")) return true
+
+
+            lens.top = (e.clientY - (lensHeight / 2))
+            lens.bottom =(e.clientY + (lensHeight / 2))
+
+
+            $(".lens-shutter").remove()
+            makeShutters(lens)
+            onScroll()
+
         })
 
 
