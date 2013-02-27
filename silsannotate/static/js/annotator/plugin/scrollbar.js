@@ -20,15 +20,33 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         var numAnnotations
         var lastScrollTop = 0
         var annoWindow = {top: 200, bottom: 400}
+        var viewportHeight = $(window).height()
         numAnnotations = annotations.length
 
-        $("<div id='lens'></div>").css(
-            {
-                top: annoWindow.top + "px",
-                height: (annoWindow.bottom - annoWindow.top) + "px"
-            }
+        var shutter$ = $("<div class='lens-shutter'><div class='main'></div></div></div>")
+
+        // insert the shutters that define the lens
+        shutter$.clone().addClass("top").css(
+            "height",
+            (annoWindow.top) + "px"
         )
+            .append("<img class='bracket' src='../static/img/lens-bracket-top.png'>")
             .appendTo("body")
+
+        shutter$.clone().addClass("bottom").css(
+                "height",
+                (annoWindow.bottom) + "px"
+        )
+            .append("<img class='bracket' src='../static/img/lens-bracket-bottom.png'>")
+            .appendTo("body")
+
+
+
+
+
+        /***********************************************************************
+         * functions
+         **********************************************************************/
 
         var changeHighlightBackgrounds = function(anno, active) {
             var numHighlights = anno.highlights.length
@@ -49,6 +67,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             var userIcon = '<img src="'+ userIconUrl +'">'
             annoLi$.prepend(userIcon)
             annoLi$.find("span.text").append(anno.text)
+//            annoLi$.click()
             if (scrollDir == "down"){
                 annoLi$.appendTo("#filmstrip ul.main")
             }

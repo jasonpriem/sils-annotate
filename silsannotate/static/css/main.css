@@ -2,6 +2,8 @@ body {
   line-height: 1.2;
 }
 body div.annotator-wrapper {
+  position: relative;
+  z-index: 3;
   width: 600px;
   float: right;
   margin: 50px 480px 50px 0;
@@ -34,8 +36,6 @@ body div.annotator-wrapper span.annotator-hl.active {
   right: 30px;
   bottom: 0;
   background: #fff;
-  border-left: 1px solid #ddd;
-  box-shadow: 0px 0px 15px #000;
 }
 #filmstrip ul.main {
   width: 100%;
@@ -63,14 +63,31 @@ body div.annotator-wrapper span.annotator-hl.active {
   color: #444;
   font-size: 11px;
 }
-#lens {
-  background: #fff;
-  width: 25px;
+div.lens-shutter {
+  background: #fafafa;
+  width: 100%;
   position: fixed;
   right: 430px;
+  z-index: 0;
+}
+div.lens-shutter img.bracket {
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  right: 0;
   top: 0;
-  border-top: 1px solid #999;
-  border-bottom: 1px solid #999;
+}
+div.lens-shutter.top {
+  top: 0;
+}
+div.lens-shutter.top div.main {
+  border-bottom: 1px solid #eee;
+}
+div.lens-shutter.bottom {
+  bottom: 0;
+}
+div.lens-shutter.bottom div.main {
+  border-top: 1px solid #eee;
 }
 .annotator-viewer {
   position: fixed;
