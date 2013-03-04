@@ -37,6 +37,9 @@ body div.annotator-wrapper span.annotator-hl.active {
   bottom: 0;
   background: #fff;
 }
+#filmstrip div.filter {
+  height: 20px;
+}
 #filmstrip ul.main {
   width: 100%;
   padding: 0;

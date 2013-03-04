@@ -18,6 +18,8 @@ Annotator.Plugin.Scrollbar = (function(_super) {
     Scrollbar.prototype.updateScrollbar = function(annotations) {
         var numAnnotations
         var lastScrollTop = 0
+        var userToShow = false
+        var userToShow = "jason"
 
         // lens is global on purpose, easier debugging...
         lens = {top: 200, bottom: 400}
@@ -65,10 +67,20 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             }
         }
 
+        var filterByUserId = function(userId) {
+            console.log("hide all the", userId)
+        }
+
         var renderAnno = function(anno, scrollDir) {
+            console.log(userToShow, anno.userId)
+            if (userToShow && userToShow != anno.userId) return false
+
             var annoLi$ = $('<li class="sils-anno ' + anno._id + '"><span class="text"></span></li>')
             var userIconUrl = "/static/img/users/" + anno.userId + ".jpg"
-            var userIcon = '<img src="'+ userIconUrl +'">'
+            var userIcon = $('<img src="'+ userIconUrl +'">')
+            userIcon.click(function(){
+                filterByUserId(anno.userId)
+            })
             annoLi$.prepend(userIcon)
             annoLi$.find("span.text").append(anno.text)
 //            annoLi$.click()
