@@ -56,6 +56,12 @@ Annotator.Plugin.Store = (function(_super) {
   Store.prototype.annotationCreated = function(annotation) {
     var _this = this;
     if (__indexOf.call(this.annotations, annotation) < 0) {
+
+      // try to solve bug causing range-less annotations to be stored and Break Everything
+      if (!annotation.ranges.length) return false
+
+
+
       this.registerAnnotation(annotation);
       return this._apiRequest('create', annotation, function(data) {
         if (!(data.id != null)) {
