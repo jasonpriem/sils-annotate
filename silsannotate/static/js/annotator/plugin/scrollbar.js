@@ -19,7 +19,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         var numAnnotations
         var lastScrollTop = 0
         var userToShow = false
-        var userToShow = "jason"
 
         // lens is global on purpose, easier debugging...
         lens = {top: 200, bottom: 400}
@@ -69,13 +68,14 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var filterByUserId = function(userId) {
             console.log("hide all the", userId)
+            $("#filmstrip li.sils-anno").not("."+userId).hide()
+
         }
 
         var renderAnno = function(anno, scrollDir) {
-            console.log(userToShow, anno.userId)
             if (userToShow && userToShow != anno.userId) return false
 
-            var annoLi$ = $('<li class="sils-anno ' + anno._id + '"><span class="text"></span></li>')
+            var annoLi$ = $('<li class="sils-anno ' + anno._id + ' ' + anno.userId + '"><span class="text"></span></li>')
             var userIconUrl = "/static/img/users/" + anno.userId + ".jpg"
             var userIcon = $('<img src="'+ userIconUrl +'">')
             userIcon.click(function(){
@@ -162,7 +162,9 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
 
         $("div.annotator-wrapper").click(function(e){
-            console.log("from .annotator-wrapper click handler, lens:", lens)
+//            console.log("from .annotator-wrapper click handler, lens:", lens)
+            console.log(this)
+            if (this.id == "filmstrip") return false
 
             var lensHeight = lens.bottom - lens.top
 

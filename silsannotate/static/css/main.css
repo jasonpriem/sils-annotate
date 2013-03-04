@@ -36,6 +36,7 @@ body div.annotator-wrapper span.annotator-hl.active {
   right: 30px;
   bottom: 0;
   background: #fff;
+  z-index: 10;
 }
 #filmstrip div.filter {
   height: 20px;
