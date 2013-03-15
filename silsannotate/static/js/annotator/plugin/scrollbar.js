@@ -33,6 +33,14 @@ Annotator.Plugin.Scrollbar = (function(_super) {
          * functions
          **********************************************************************/
 
+        var findTopToCenterAnnoList = function() {
+            var halfLensHeight = (lens.bottom - lens.top) / 2
+            var heightOfTopShutter = $(".lens-shutter.top").height()
+            var middleOfLensOffset = heightOfTopShutter + halfLensHeight
+
+            var heightOfAnnoList = $()
+        }
+
         var makeShutters = function(lens){
             var lensHight = lens.bottom - lens.top
             var shutter$ = $("<div class='lens-shutter'><div class='main'></div></div></div>")
@@ -76,7 +84,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             if (userToShow && userToShow != anno.userId) return false
 
             var annoLi$ = $('<li class="sils-anno ' + anno._id + ' ' + anno.userId + '"><span class="text"></span></li>')
-            var userIconUrl = "/static/img/users/" + anno.userId + ".jpg"
+            var userIconUrl = "/static/img/users/" + anno.userId + ".png"
             var userIcon = $('<img src="'+ userIconUrl +'">')
             userIcon.click(function(){
                 filterByUserId(anno.userId)
