@@ -16,6 +16,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
     }
 
     Scrollbar.prototype.updateScrollbar = function(annotations) {
+
         var numAnnotations
         var lastScrollTop = 0
         var userToShow = false

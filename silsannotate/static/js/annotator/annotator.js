@@ -104,13 +104,6 @@ Annotator = (function(_super) {
     this._setupDynamicStyle();
     this.adder = $(this.html.adder).appendTo(this.wrapper).hide();
 
-//
-//   $("html").click(function(){
-//       console.log("click!")
-//       if (!$(this).hasClass("annotator-editor")) {
-//           $("a.annotator-cancel").trigger("click")
-//       }
-//   })
   }
 
   Annotator.prototype._setupWrapper = function() {
@@ -146,7 +139,7 @@ Annotator = (function(_super) {
     this.editor = new Annotator.Editor();
     this.editor.hide().on('hide', this.onEditorHide).on('save', this.onEditorSubmit).addField({
       type: 'textarea',
-      label: _t('Comments') + '\u2026',
+      label: _t('Type comments here; press enter to save.'),
       load: function(field, annotation) {
         return $(field).find('textarea').val(annotation.text || '');
       },
@@ -409,7 +402,6 @@ Annotator = (function(_super) {
       container = range.commonAncestor;
       if ($(container).hasClass('annotator-hl')) {
         container = $(container).parents('[class^=annotator-hl]')[0];
-        console.log("parent of highlighting: ", container)
       }
       if (this.isAnnotator(container)) {
           console.log("isAnnotator(container) returned true, but pressing on.")
