@@ -15,25 +15,24 @@ body div.annotator-wrapper span.annotator-hl.active {
   background: rgba(255, 255, 10, 0.6);
 }
 #scrollbar {
-  width: 30px;
+  width: 15px;
   position: fixed;
   top: 0;
-  right: 0;
+  right: 10px;
   bottom: 0;
-  background: #eee;
-  border-left: 1px solid #ddd;
+  background: #333;
 }
 #scrollbar div.scrollbar-block {
   position: fixed;
-  opacity: .1;
-  background: #000;
+  opacity: .5;
+  background: yellow;
   width: 100%;
 }
 #filmstrip {
-  width: 400px;
+  width: 405px;
   position: fixed;
   top: 0;
-  right: 30px;
+  right: 25px;
   bottom: 0;
   background: #fff;
   z-index: 10;
@@ -48,7 +47,7 @@ body div.annotator-wrapper span.annotator-hl.active {
 }
 #filmstrip ul.main li {
   width: 100%;
-  padding: 2px 2px;
+  padding: 2px 0;
   margin: 0;
   list-style-type: none;
   height: 20px;
