@@ -24,9 +24,9 @@ body div.annotator-wrapper span.annotator-hl.active {
 }
 #scrollbar div.scrollbar-block {
   position: fixed;
-  opacity: .5;
+  opacity: .3;
   background: yellow;
-  width: 100%;
+  width: 15px;
 }
 #filmstrip {
   width: 405px;

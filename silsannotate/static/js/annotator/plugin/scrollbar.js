@@ -158,7 +158,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         makeShutters(lens)
 
         for (var i=0; i < numAnnotations; i++ ){
+
+
             var thisAnno = annotations[i]
+            if (!thisAnno.highlights[0]) continue
+
             thisAnno.offsetTop = $(thisAnno.highlights[0]).offset().top
             var annoBottom$ = $(_.last(thisAnno.highlights))
             thisAnno.offsetBottom = annoBottom$.offset().top
