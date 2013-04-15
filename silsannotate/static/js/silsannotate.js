@@ -6,13 +6,15 @@ $(document).ready(function(){
     scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
 
 
-    var textId = window.location.pathname.split("/")[2]
+    var url = window.location.pathname
+    var cleanUrl = url.replace("sandbox/", "")
+    var textId = cleanUrl.split("/")[2]
     var userId = window.location.href.match(/user=(\w+)/)[1]
 
     var content = $(document.body).annotator();
     content.annotator('addPlugin', 'Store', {
         // The endpoint of the store on your server.
-        prefix: '/api',
+        prefix: apiRoot, // set at document level by Flask
 
         // Attach the uri of the current page to all annotations to allow search.
         annotationData: {
