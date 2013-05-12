@@ -95,6 +95,31 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             }
         }
 
+        var annoFocus = function(e) {
+            var annoId = readIdFromClassStr(e.className)
+            $("."+annoId).addClass("active")
+        }
+
+        var annoBlur = function(e) {
+            var annoId = readIdFromClassStr(e.className)
+            $("."+annoId).removeClass("active")
+        }
+
+        var readIdFromClassStr = function(classStr, removePrefix) {
+            var re = /id-(\w+)/
+            var ret = false
+            if (re.test(classStr)) {
+                if (removePrefix) {
+                    return re.exec(classStr)[1]
+                }
+                else {
+                    return re.exec(classStr)[0]
+                }
+            }
+            return ret
+        }
+
+
 
 
 
@@ -119,7 +144,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         $("span.annotator-hl").each(function(){
             var elem$ = $(this)
-            elem$.addClass(elem$.data().annotation.id)
+
+            // add the annotation ID as a class
+            elem$.addClass("id-" + elem$.data().annotation.id)
+
+            // draw a line on the scrollbar
             $("<div class='scrollbar-block'></div>")
                 .css(
                     {
@@ -128,6 +157,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                     }
                 )
                 .appendTo("#scrollbar")
+
+            elem$.hover(
+                function(){ annoFocus(this) },
+                function(){ annoBlur(this) }
+            )
         })
 
     };
