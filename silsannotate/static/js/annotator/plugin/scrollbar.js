@@ -119,6 +119,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             }
             return ret
         }
+
         var unActivateParentspans = function(){
 
             // find which unique annotations are highlighted
@@ -136,6 +137,9 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             console.log("these annos are active: ", activeAnnos)
 
             // figure out how many characters are highlighted for each active anno
+            var annoPairs = _.pairs(activeAnnos)
+            var topPairs = _.filter(annoPairs, function(){})
+
 
         }
 

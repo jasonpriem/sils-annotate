@@ -2,17 +2,38 @@ body {
   line-height: 1.2;
 }
 body div.annotator-wrapper {
-  position: relative;
-  z-index: 3;
-  width: 600px;
-  float: right;
-  margin: 50px 480px 50px 0;
+  margin: 50px 50px 50px 100px;
 }
 body div.annotator-wrapper span.annotator-hl {
   background: rgba(255, 255, 10, 0.1);
 }
 body div.annotator-wrapper span.annotator-hl.active {
   background: rgba(255, 0, 0, 0.4);
+}
+body div.annotator-wrapper h1,
+body div.annotator-wrapper h2,
+body div.annotator-wrapper h3,
+body div.annotator-wrapper h4,
+body div.annotator-wrapper h5,
+body div.annotator-wrapper h6,
+body div.annotator-wrapper p {
+  position: relative;
+  width: 600px;
+}
+body div.annotator-wrapper h1 div.anno-display,
+body div.annotator-wrapper h2 div.anno-display,
+body div.annotator-wrapper h3 div.anno-display,
+body div.annotator-wrapper h4 div.anno-display,
+body div.annotator-wrapper h5 div.anno-display,
+body div.annotator-wrapper h6 div.anno-display,
+body div.annotator-wrapper p div.anno-display {
+  clear: both;
+  position: absolute;
+  width: 400px;
+  background: #eee;
+  top: 0;
+  left: 630px;
+  height: 100%;
 }
 #scrollbar {
   width: 15px;

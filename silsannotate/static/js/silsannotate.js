@@ -1,8 +1,17 @@
+var wrapHeadingsAndParas = function() {
+    $("h1,h2,h3,h4,h5,h6,p").append("<div class='anno-display'></div>")
+}
+
+
 $(document).ready(function(){
 
     // prep the scrollbar:
     $("body").append("<div id='scrollbar'></div>")
     scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
+
+
+    // make the annotation containers
+    wrapHeadingsAndParas()
 
 
     var url = window.location.pathname

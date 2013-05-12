@@ -319,6 +319,7 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.highlightRanges = function(normedRanges, cssClass) {
+
     var highlights, r, _i, _len;
     if (cssClass == null) cssClass = 'annotator-hl';
     highlights = [];
