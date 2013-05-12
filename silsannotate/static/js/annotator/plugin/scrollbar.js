@@ -34,33 +34,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
          * functions
          **********************************************************************/
 
-        var findTopToCenterAnnoList = function() {
-            var halfLensHeight = (lens.bottom - lens.top) / 2
-            var heightOfTopShutter = $(".lens-shutter.top").height()
-            var middleOfLensOffset = heightOfTopShutter + halfLensHeight
-
-            var heightOfAnnoList = $()
-        }
-
-        var makeShutters = function(lens){
-            var lensHight = lens.bottom - lens.top
-            var shutter$ = $("<div class='lens-shutter'><div class='main'></div></div></div>")
-
-            // insert the shutters that define the lens
-            shutter$.clone().addClass("top").css(
-                    "height",
-                    (lens.top) + "px"
-                )
-                .append("<img class='bracket' src='../static/img/lens-bracket-top.png'>")
-                .appendTo("body")
-
-            shutter$.clone().addClass("bottom").css(
-                    "height",
-                    ($(window).height() - lens.bottom) + "px"
-                )
-                .append("<img class='bracket' src='../static/img/lens-bracket-bottom.png'>")
-                .appendTo("body")
-        }
 
         var changeHighlightBackgrounds = function(anno, active) {
             var numHighlights = anno.highlights.length
@@ -73,12 +46,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                     $(anno.highlights[i]).removeClass(activeClass)
                 }
             }
-        }
-
-        var filterByUserId = function(userId) {
-            console.log("hide all the", userId)
-            $("#filmstrip li.sils-anno").not("."+userId).hide()
-
         }
 
         var renderAnno = function(anno, scrollDir) {
@@ -128,25 +95,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             }
         }
 
-        var onScroll = function() {
-            var scrollTop = $(document).scrollTop()
-            var scrollDir = (lastScrollTop - scrollTop > 0) ? "up" : "down"
-
-            for (var i=0; i < numAnnotations; i++ ){
-                var thisAnno =  annotations[i]
-                var topPosition = thisAnno.offsetTop - scrollTop
-                var bottomPosition = thisAnno.offsetBottom - scrollTop
-
-                if (bottomPosition > lens.top && topPosition < lens.bottom) {
-                    addAnnoToPane(thisAnno, scrollDir)
-                }
-                else {
-                    removeAnnoFromPane(thisAnno, scrollDir)
-                }
-            }
-            lastScrollTop = scrollTop
-        }
-
 
 
 
@@ -155,10 +103,8 @@ Annotator.Plugin.Scrollbar = (function(_super) {
          * procedural code
          **********************************************************************/
 
-        makeShutters(lens)
 
         for (var i=0; i < numAnnotations; i++ ){
-
 
             var thisAnno = annotations[i]
             if (!thisAnno.highlights[0]) continue
@@ -169,36 +115,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 + annoBottom$.height()
         }
 
-        $(window).scroll(function() {
-            onScroll()
-        })
-
-
-        $("div.annotator-wrapper").click(function(e){
-//            console.log("from .annotator-wrapper click handler, lens:", lens)
-            console.log(this)
-            if (this.id == "filmstrip") return false
-
-            var lensHeight = lens.bottom - lens.top
-
-            if (typeof e.clientY === "undefined") return true
-            if (!$(".annotator-editor").hasClass("annotator-hide")) return true
-
-
-            lens.top = (e.clientY - (lensHeight / 2))
-            lens.bottom =(e.clientY + (lensHeight / 2))
-
-
-            $(".lens-shutter").remove()
-            makeShutters(lens)
-            onScroll()
-
-        })
-
 
 
         $("span.annotator-hl").each(function(){
             var elem$ = $(this)
+            elem$.addClass(elem$.data().annotation.id)
             $("<div class='scrollbar-block'></div>")
                 .css(
                     {
