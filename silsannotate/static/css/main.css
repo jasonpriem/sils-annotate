@@ -12,7 +12,7 @@ body div.annotator-wrapper span.annotator-hl {
   background: rgba(255, 255, 10, 0.1);
 }
 body div.annotator-wrapper span.annotator-hl.active {
-  background: rgba(255, 255, 10, 0.6);
+  background: rgba(255, 0, 0, 0.4);
 }
 #scrollbar {
   width: 15px;

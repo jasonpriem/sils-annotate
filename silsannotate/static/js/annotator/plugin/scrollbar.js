@@ -98,6 +98,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         var annoFocus = function(e) {
             var annoId = readIdFromClassStr(e.className)
             $("."+annoId).addClass("active")
+            unActivateParentspans()
         }
 
         var annoBlur = function(e) {
@@ -117,6 +118,29 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 }
             }
             return ret
+        }
+        var unActivateParentspans = function(){
+
+            // find which unique annotations are highlighted
+            var activeAnnos = {}
+
+            $(".active").each(function(){
+                var annoId = readIdFromClassStr(this.className)
+                if (activeAnnos[annoId]) {
+                    activeAnnos[annoId] += $(this).text().length
+                }
+                else {
+                    activeAnnos[annoId] = $(this).text().length
+                }
+            })
+            console.log("these annos are active: ", activeAnnos)
+
+            // figure out how many characters are highlighted for each active anno
+
+        }
+
+        var numCharsInClass = function(className) {
+
         }
 
 
