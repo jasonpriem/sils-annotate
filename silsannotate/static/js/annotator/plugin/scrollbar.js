@@ -128,14 +128,16 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                                 var renderedAnnosList$ = $(this).find("ul.sils-annos")
                                 _.each(annos, function(anno){
                                     var renderedAnno = renderAnno(anno)
-                                    console.log(anno)
                                     renderedAnnosList$.append(renderedAnno)
                                 })
+
+                                console.log("renderedAnnos height: ", renderedAnnosList$.height())
 
 
 
 
                 })
+
 
 
         }
