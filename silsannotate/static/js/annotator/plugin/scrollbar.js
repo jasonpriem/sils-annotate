@@ -48,52 +48,18 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             }
         }
 
-        var renderAnno = function(anno, scrollDir) {
+        var renderAnno = function(anno) {
             if (userToShow && userToShow != anno.userId) return false
 
             var annoLi$ = $('<li class="sils-anno ' + anno._id + ' ' + anno.userId + '"><span class="text"></span></li>')
             var userIconUrl = "/static/img/users/" + anno.userId + ".png"
             var userIcon = $('<img src="'+ userIconUrl +'">')
-            userIcon.click(function(){
-                filterByUserId(anno.userId)
-            })
             annoLi$.prepend(userIcon)
             annoLi$.find("span.text").append(anno.text)
-//            annoLi$.click()
-            if (scrollDir == "down"){
-                annoLi$.appendTo("#filmstrip ul.main")
-            }
-            else if (scrollDir == "up") {
-                annoLi$.prependTo("#filmstrip ul.main")
-            }
+            return annoLi$
 
         }
 
-        var addAnnoToPane = function(anno, scrollDir) {
-            if (anno.active == true) {
-                return true
-            }
-            else {
-                renderAnno(anno, scrollDir)
-                anno.active = true
-            }
-        }
-
-        var removeAnnoFromPane = function(anno, scrollDir) {
-            if (!anno.active) {
-                return false
-            }
-            else {
-                if (scrollDir == "down") {
-                    $("#filmstrip li." + anno._id).remove()
-                }
-                else if (scrollDir == "up") {
-                    $("#filmstrip li." + anno._id).remove()
-
-                }
-                anno.active = false
-            }
-        }
 
         var annoFocus = function(e) {
             var annoId = readIdFromClassStr(e.className)
@@ -134,7 +100,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                     activeAnnos[annoId] = $(this).text().length
                 }
             })
-            console.log("these annos are active: ", activeAnnos)
 
             // figure out how many characters are highlighted for each active anno
             var annoPairs = _.pairs(activeAnnos)
@@ -147,6 +112,35 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         }
 
+        var getAnnotationsFromSetOfHls = function(elem$) {
+            var annos = {}
+            elem$.find(".annotator-hl").each(function(){
+                annos[readIdFromClassStr(this.className)] = $(this).data().annotation
+            })
+            return _.values(annos)
+        }
+
+        var writeAnnotationTexts = function() {
+            $("h1,h2,h3,h4,h5,h6,p")
+                .append("<div class='anno-display'><ul class='sils-annos'></ul></div>")
+                .each(function(){
+                                var annos = getAnnotationsFromSetOfHls($(this));
+                                var renderedAnnosList$ = $(this).find("ul.sils-annos")
+                                _.each(annos, function(anno){
+                                    var renderedAnno = renderAnno(anno)
+                                    console.log(anno)
+                                    renderedAnnosList$.append(renderedAnno)
+                                })
+
+
+
+
+                })
+
+
+        }
+
+
 
 
 
@@ -155,20 +149,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         /***********************************************************************
          * procedural code
          **********************************************************************/
-
-
-        for (var i=0; i < numAnnotations; i++ ){
-
-            var thisAnno = annotations[i]
-            if (!thisAnno.highlights[0]) continue
-
-            thisAnno.offsetTop = $(thisAnno.highlights[0]).offset().top
-            var annoBottom$ = $(_.last(thisAnno.highlights))
-            thisAnno.offsetBottom = annoBottom$.offset().top
-                + annoBottom$.height()
-        }
-
-
 
         $("span.annotator-hl").each(function(){
             var elem$ = $(this)
@@ -191,6 +171,8 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 function(){ annoBlur(this) }
             )
         })
+
+        writeAnnotationTexts()
 
     };
 

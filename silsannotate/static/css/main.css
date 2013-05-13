@@ -34,6 +34,57 @@ body div.annotator-wrapper p div.anno-display {
   top: 0;
   left: 630px;
   height: 100%;
+  border-left: 5px solid #ddd;
+}
+body div.annotator-wrapper h1 div.anno-display ul.sils-annos,
+body div.annotator-wrapper h2 div.anno-display ul.sils-annos,
+body div.annotator-wrapper h3 div.anno-display ul.sils-annos,
+body div.annotator-wrapper h4 div.anno-display ul.sils-annos,
+body div.annotator-wrapper h5 div.anno-display ul.sils-annos,
+body div.annotator-wrapper h6 div.anno-display ul.sils-annos,
+body div.annotator-wrapper p div.anno-display ul.sils-annos {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+body div.annotator-wrapper h1 div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h2 div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h3 div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h4 div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h5 div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h6 div.anno-display ul.sils-annos li,
+body div.annotator-wrapper p div.anno-display ul.sils-annos li {
+  width: 100%;
+  padding: 2px 0;
+  margin: 0;
+  list-style-type: none;
+  height: 20px;
+  border-bottom: 1px solid #bbb;
+}
+body div.annotator-wrapper h1 div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h2 div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h3 div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h4 div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h5 div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h6 div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper p div.anno-display ul.sils-annos li img {
+  margin-right: 5px;
+  height: 20px;
+  float: left;
+}
+body div.annotator-wrapper h1 div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h2 div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h3 div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h4 div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h5 div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h6 div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper p div.anno-display ul.sils-annos li span.text {
+  padding-bottom: 4px;
+  float: left;
+  margin-top: 4px;
+  font-family: verdana, sans-serif;
+  color: #444;
+  font-size: 11px;
 }
 #scrollbar {
   width: 15px;
@@ -48,44 +99,6 @@ body div.annotator-wrapper p div.anno-display {
   opacity: .3;
   background: yellow;
   width: 15px;
-}
-#filmstrip {
-  width: 405px;
-  position: fixed;
-  top: 0;
-  right: 25px;
-  bottom: 0;
-  background: #fff;
-  z-index: 10;
-}
-#filmstrip div.filter {
-  height: 20px;
-}
-#filmstrip ul.main {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-#filmstrip ul.main li {
-  width: 100%;
-  padding: 2px 0;
-  margin: 0;
-  list-style-type: none;
-  height: 20px;
-  border-bottom: 1px solid #bbb;
-}
-#filmstrip ul.main li img {
-  margin-right: 5px;
-  height: 20px;
-  float: left;
-}
-#filmstrip ul.main li span.text {
-  padding-bottom: 4px;
-  float: left;
-  margin-top: 4px;
-  font-family: verdana, sans-serif;
-  color: #444;
-  font-size: 11px;
 }
 div.lens-shutter {
   background: #fafafa;

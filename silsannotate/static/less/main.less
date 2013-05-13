@@ -19,6 +19,33 @@ body {
             top: 0;
             left: 630px;
             height: 100%;
+            border-left: 5px solid #ddd;
+            ul.sils-annos {
+               width: 100%;
+               padding: 0;
+               margin: 0;
+               li {
+                  width: 100%;
+                  padding: 2px 0;
+                  margin: 0;
+                  list-style-type: none;
+                  height: 20px;
+                  border-bottom: 1px solid #bbb;
+                  img {
+                     margin-right: 5px;
+                     height: 20px;
+                     float:left;
+                  }
+                  span.text {
+                     padding-bottom: 4px;
+                     float:left;
+                     margin-top: 4px;
+                     font-family: verdana, sans-serif;
+                     color: #444;
+                     font-size: 11px;
+                  }
+               }
+            }
          }
       }
    }
@@ -39,46 +66,6 @@ body {
    }
 }
 
-
-
-#filmstrip {
-   width: 405px;
-   position: fixed;
-   top:0;
-   right:25px;
-   bottom:0;
-   background: #fff;
-   z-index: 10;
-   div.filter {
-      height: 20px;
-   }
-   ul.main {
-      width: 100%;
-      padding: 0;
-      margin: 0;
-      li {
-         width: 100%;
-         padding: 2px 0;
-         margin: 0;
-         list-style-type: none;
-         height: 20px;
-         border-bottom: 1px solid #bbb;
-         img {
-            margin-right: 5px;
-            height: 20px;
-            float:left;
-         }
-         span.text {
-            padding-bottom: 4px;
-            float:left;
-            margin-top: 4px;
-            font-family: verdana, sans-serif;
-            color: #444;
-            font-size: 11px;
-         }
-      }
-   }
-}
 
 div.lens-shutter {
    background: #fafafa;
