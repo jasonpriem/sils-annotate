@@ -2,6 +2,9 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
+
+var focusedIds = {}
+
 Annotator.Plugin.Scrollbar = (function(_super) {
 
     __extends(Scrollbar, _super);
@@ -67,13 +70,42 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         }
 
 
-        var annoFocus = function(e) {
-            var annoId = readIdFromClassStr(e.className)
-            $("."+annoId).addClass("active")
-            unActivateParentspans()
+        var annoFocus = function(elems) {
+
+            // select all the highlights that match a selected id
+            $(elems).each(function(){
+                var thisId = readIdFromClassStr(this.className)
+                focusedIds[thisId] = $('.'+thisId).text().length
+            })
+
+            console.log("focusedids", focusedIds)
+
+
+            // find which ids have the shortest length (array b/c ties are allowed)
+            var shortestIds = []
+            var shortestLenSoFar = Infinity
+            _.each(focusedIds, function(len, id){
+                if (len < shortestLenSoFar) {
+                    shortestLenSoFar = len
+                    shortestIds = [id]
+                }
+                else if (len == shortestLenSoFar) {
+                    shortestIds.push(id)
+                }
+            })
+
+            console.log("shortestIds", shortestIds)
+            $(".active").removeClass("active")
+            $("."+shortestIds.join(" .")).addClass("active")
+
+
+
+
+            return false
         }
 
         var annoBlur = function(e) {
+            focusedIds = {}
             var annoId = readIdFromClassStr(e.className)
             $("."+annoId).removeClass("active")
         }
@@ -92,29 +124,59 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             return ret
         }
 
-        var unActivateParentspans = function(){
-
-            // find which unique annotations are highlighted
-            var activeAnnos = {}
-
-            $(".active").each(function(){
-                var annoId = readIdFromClassStr(this.className)
-                if (activeAnnos[annoId]) {
-                    activeAnnos[annoId] += $(this).text().length
+        var annoIdsWithSmallestTexts = function(ids){
+            var shortestIds = []
+            var shortestLenSoFar = Infinity
+            _.each(ids, function(id){
+                var len = $(".annotator-hl "+id).text().length
+                if (len < shortestLenSoFar) {
+                    shortestLenSoFar = len
+                    shortestIds = [id]
                 }
-                else {
-                    activeAnnos[annoId] = $(this).text().length
+                else if (len == shortestLenSoFar) {
+                    shortestIds.push(id)
                 }
             })
 
-            // figure out how many characters are highlighted for each active anno
-            var annoPairs = _.pairs(activeAnnos)
-            var topPairs = _.filter(annoPairs, function(){})
+            console.log("shortestIds", shortestIds)
+            return shortestIds
+        }
 
+        var unActivateParentspans = function(){
+
+            // find which unique annotations are highlighted
+            var contentLengths = {}
+
+            $(".active .annotator-hl").each(function(){
+
+                var annoId = readIdFromClassStr(this.className)
+                var thisLength = $(this).text().length
+
+                if (contentLengths[thisLength]) { // we've found something with length before
+                    contentLengths[thisLength].push(annoId)
+                }
+                else { // we've never seen something of this length
+                    contentLengths[thisLength] = [annoId]
+                }
+            })
+
+            // find the shortest contentLength, and its associate IDs
+            var shortest = _.min(_.pairs(contentLengths), function(x){ return x[0]})
+            var shortestIDs = _.uniq(shortest[1])
+            console.log(shortestIDs)
+
+            $(".active .annotator-hl").each(function(){
+                this$ = $(this)
+                if (this$.hasClass(shortestIDs)) {
+                    this$.removeClass("active")
+                }
+            })
 
         }
 
-        var numCharsInClass = function(className) {
+
+
+        var findsSmallestPair = function(className) {
 
         }
 
@@ -173,12 +235,12 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                     }
                 )
                 .appendTo("#scrollbar")
-
-            elem$.hover(
-                function(){ annoFocus(this) },
-                function(){ annoBlur(this) }
-            )
         })
+
+        $(".annotator-hl").hover(
+            function(){ annoFocus(this) },
+            function(){ annoBlur(this) }
+        )
 
         writeAnnotationTexts()
 

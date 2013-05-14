@@ -61,6 +61,7 @@ body div.annotator-wrapper p div.anno-display ul.sils-annos li {
   clear: both;
   list-style-type: none;
   border-radius: 6px;
+  cursor: default;
 }
 body div.annotator-wrapper h1 div.anno-display ul.sils-annos li.active,
 body div.annotator-wrapper h2 div.anno-display ul.sils-annos li.active,
