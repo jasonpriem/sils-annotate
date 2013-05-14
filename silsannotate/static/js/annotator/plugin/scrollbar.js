@@ -51,11 +51,17 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         var renderAnno = function(anno) {
             if (userToShow && userToShow != anno.userId) return false
 
-            var annoLi$ = $('<li class="sils-anno ' + anno._id + ' ' + anno.userId + '"><span class="text"></span></li>')
+
+            var idClass = "id-" + anno._id
+            var annoLi$ = $('<li class="sils-anno ' + idClass + ' ' + anno.userId + '"><span class="text"></span></li>')
             var userIconUrl = "/static/img/users/" + anno.userId + ".png"
             var userIcon = $('<img src="'+ userIconUrl +'">')
             annoLi$.prepend(userIcon)
             annoLi$.find("span.text").append(anno.text)
+            annoLi$.hover(
+                function(){$("."+idClass).addClass("active")},
+                function(){$("."+idClass).removeClass("active")}
+            )
             return annoLi$
 
         }
@@ -124,15 +130,15 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             $("h1,h2,h3,h4,h5,h6,p")
                 .append("<div class='anno-display'><ul class='sils-annos'></ul></div>")
                 .each(function(){
-                                var annos = getAnnotationsFromSetOfHls($(this));
-                                var renderedAnnosList$ = $(this).find("ul.sils-annos")
-                                _.each(annos, function(anno){
-                                    var renderedAnno = renderAnno(anno)
-                                    renderedAnnosList$.append(renderedAnno)
-                                })
+                    var annos = getAnnotationsFromSetOfHls($(this));
+                    var renderedAnnosList$ = $(this).find("ul.sils-annos")
+                    _.each(annos, function(anno){
+                        var renderedAnno = renderAnno(anno)
+                        renderedAnnosList$.append(renderedAnno)
+                    })
 
-                                console.log("renderedAnnos height: ", renderedAnnosList$.height())
-
+                    // make sure there's room for all the rendered annotations
+                    $(this).css({"min-height": renderedAnnosList$.height() + "px"})
 
 
 

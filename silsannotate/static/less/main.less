@@ -21,19 +21,32 @@ body {
             ul.sils-annos {
                width: 100%;
                padding: 0;
-               margin: 0;
+               margin: -3px 0 5px 5px;
+               padding-top: 4px;
 
                li {
                   width: 100%;
-                  padding: 0 0 10px 0;
+                  padding: 2px 2px 5px 2px;
                   min-height: 25px;
                   font-weight: normal;
                   margin: 0;
                   clear:both;
                   list-style-type: none;
+                  border-radius: 6px;
+
+                  &.active {
+                     img {
+                        border: 1px solid red;
+                     }
+                     background: lightpink;
+
+                  }
+
                   img {
                      margin-right: 5px;
-                     height: 25px;
+                     height: 24px;
+                     width:  24px;
+                     border: 1px solid #333;
                      float:left;
                      border-radius: 6px;
                   }
@@ -43,7 +56,7 @@ body {
                      color: #444;
                      font-size: 11px;
                      display:block;
-                     margin-left:12px;
+                     margin-left: 3px;
                   }
                }
             }

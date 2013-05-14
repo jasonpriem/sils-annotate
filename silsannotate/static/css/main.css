@@ -43,7 +43,8 @@ body div.annotator-wrapper h6 div.anno-display ul.sils-annos,
 body div.annotator-wrapper p div.anno-display ul.sils-annos {
   width: 100%;
   padding: 0;
-  margin: 0;
+  margin: -3px 0 5px 5px;
+  padding-top: 4px;
 }
 body div.annotator-wrapper h1 div.anno-display ul.sils-annos li,
 body div.annotator-wrapper h2 div.anno-display ul.sils-annos li,
@@ -53,12 +54,31 @@ body div.annotator-wrapper h5 div.anno-display ul.sils-annos li,
 body div.annotator-wrapper h6 div.anno-display ul.sils-annos li,
 body div.annotator-wrapper p div.anno-display ul.sils-annos li {
   width: 100%;
-  padding: 0 0 10px 0;
+  padding: 2px 2px 5px 2px;
   min-height: 25px;
   font-weight: normal;
   margin: 0;
   clear: both;
   list-style-type: none;
+  border-radius: 6px;
+}
+body div.annotator-wrapper h1 div.anno-display ul.sils-annos li.active,
+body div.annotator-wrapper h2 div.anno-display ul.sils-annos li.active,
+body div.annotator-wrapper h3 div.anno-display ul.sils-annos li.active,
+body div.annotator-wrapper h4 div.anno-display ul.sils-annos li.active,
+body div.annotator-wrapper h5 div.anno-display ul.sils-annos li.active,
+body div.annotator-wrapper h6 div.anno-display ul.sils-annos li.active,
+body div.annotator-wrapper p div.anno-display ul.sils-annos li.active {
+  background: lightpink;
+}
+body div.annotator-wrapper h1 div.anno-display ul.sils-annos li.active img,
+body div.annotator-wrapper h2 div.anno-display ul.sils-annos li.active img,
+body div.annotator-wrapper h3 div.anno-display ul.sils-annos li.active img,
+body div.annotator-wrapper h4 div.anno-display ul.sils-annos li.active img,
+body div.annotator-wrapper h5 div.anno-display ul.sils-annos li.active img,
+body div.annotator-wrapper h6 div.anno-display ul.sils-annos li.active img,
+body div.annotator-wrapper p div.anno-display ul.sils-annos li.active img {
+  border: 1px solid red;
 }
 body div.annotator-wrapper h1 div.anno-display ul.sils-annos li img,
 body div.annotator-wrapper h2 div.anno-display ul.sils-annos li img,
@@ -68,7 +88,9 @@ body div.annotator-wrapper h5 div.anno-display ul.sils-annos li img,
 body div.annotator-wrapper h6 div.anno-display ul.sils-annos li img,
 body div.annotator-wrapper p div.anno-display ul.sils-annos li img {
   margin-right: 5px;
-  height: 25px;
+  height: 24px;
+  width: 24px;
+  border: 1px solid #333;
   float: left;
   border-radius: 6px;
 }
@@ -84,7 +106,7 @@ body div.annotator-wrapper p div.anno-display ul.sils-annos li span.text {
   color: #444;
   font-size: 11px;
   display: block;
-  margin-left: 12px;
+  margin-left: 3px;
 }
 #scrollbar {
   width: 15px;
