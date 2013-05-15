@@ -60,7 +60,7 @@ body div.annotator-wrapper p div.anno-display ul.sils-annos li {
   padding: 2px 2px 5px 2px;
   min-height: 25px;
   font-weight: normal;
-  margin: 0;
+  margin: 1px 0 0 0;
   clear: both;
   list-style-type: none;
   border-radius: 6px;

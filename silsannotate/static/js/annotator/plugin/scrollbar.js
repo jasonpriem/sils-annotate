@@ -75,7 +75,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             // add to the focusedIds array
             $(elems).each(function(){
                 var thisId = readIdFromClassStr(this.className)
-                focusedIds[thisId] = $('.'+thisId).text().length
+                focusedIds[thisId] = $('.annotator-hl.'+thisId).text().length
             })
 
             activateShortestId()
@@ -85,6 +85,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var activateShortestId = function(){
             // find which ids have the shortest length (array b/c ties are allowed)
+            console.log("in activateShortestIds. Here are the focusedIds:", focusedIds)
             var shortestIds = []
             var shortestLenSoFar = Infinity
             _.each(focusedIds, function(len, id){
@@ -97,10 +98,12 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 }
             })
 
-            console.log("shortestIds", shortestIds)
+            console.log("in activateShortestIds. Here are the shortestIds", shortestIds)
+
             $(".active").removeClass("active")
             if (!shortestIds.length) return false
-            $("."+shortestIds.join(" .")).addClass("active")
+            var activeIdsSelector = "."+shortestIds.join(", .")
+            $(activeIdsSelector).addClass("active")
         }
 
 
