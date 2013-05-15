@@ -23,6 +23,35 @@ body div.annotator-wrapper p {
   position: relative;
   width: 600px;
 }
+body div.annotator-wrapper h1.collapsed div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h2.collapsed div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h3.collapsed div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h4.collapsed div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h5.collapsed div.anno-display ul.sils-annos li,
+body div.annotator-wrapper h6.collapsed div.anno-display ul.sils-annos li,
+body div.annotator-wrapper p.collapsed div.anno-display ul.sils-annos li {
+  width: auto;
+  clear: none;
+  float: left;
+}
+body div.annotator-wrapper h1.collapsed div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h2.collapsed div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h3.collapsed div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h4.collapsed div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h5.collapsed div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper h6.collapsed div.anno-display ul.sils-annos li span.text,
+body div.annotator-wrapper p.collapsed div.anno-display ul.sils-annos li span.text {
+  display: none;
+}
+body div.annotator-wrapper h1.collapsed div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h2.collapsed div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h3.collapsed div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h4.collapsed div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h5.collapsed div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper h6.collapsed div.anno-display ul.sils-annos li img,
+body div.annotator-wrapper p.collapsed div.anno-display ul.sils-annos li img {
+  margin-right: 2px;
+}
 body div.annotator-wrapper h1 div.anno-display,
 body div.annotator-wrapper h2 div.anno-display,
 body div.annotator-wrapper h3 div.anno-display,
