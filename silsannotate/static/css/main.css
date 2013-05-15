@@ -5,9 +5,12 @@ body div.annotator-wrapper {
   margin: 50px 50px 50px 100px;
 }
 body div.annotator-wrapper span.annotator-hl {
-  background: rgba(255, 255, 10, 0.1);
+  background: rgba(255, 255, 10, 0.2);
 }
 body div.annotator-wrapper span.annotator-hl.active {
+  background: rgba(255, 0, 0, 0.4);
+}
+body div.annotator-wrapper span.annotator-hl.active span.annotator-hl {
   background: rgba(255, 0, 0, 0.4);
 }
 body div.annotator-wrapper h1,
