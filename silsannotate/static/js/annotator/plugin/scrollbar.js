@@ -228,9 +228,10 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         $("span.annotator-hl").each(function(){
             var elem$ = $(this)
+            var thisClassName = "id-" + elem$.data().annotation.id
 
             // add the annotation ID as a class
-            elem$.addClass("id-" + elem$.data().annotation.id)
+            elem$.addClass(thisClassName)
 
             // draw a line on the scrollbar
             $("<div class='scrollbar-block'></div>")
@@ -240,6 +241,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                     height: (elem$.height() * scrollbarScaleFactor) + "px"
                     }
                 )
+                .addClass(thisClassName)
                 .appendTo("#scrollbar")
         })
 

@@ -34,7 +34,7 @@ body div.annotator-wrapper p div.anno-display {
   position: absolute;
   width: 400px;
   top: 0;
-  left: 630px;
+  left: 650px;
   height: 100%;
 }
 body div.annotator-wrapper h1 div.anno-display ul.sils-annos,
@@ -126,31 +126,12 @@ body div.annotator-wrapper p div.anno-display ul.sils-annos li span.text {
   background: yellow;
   width: 15px;
 }
-div.lens-shutter {
-  background: #fafafa;
-  width: 100%;
-  position: fixed;
-  right: 430px;
-  z-index: 0;
-}
-div.lens-shutter img.bracket {
-  position: absolute;
-  width: 50px;
-  height: 100%;
-  right: 0;
-  top: 0;
-}
-div.lens-shutter.top {
-  top: 0;
-}
-div.lens-shutter.top div.main {
-  border-bottom: 1px solid #eee;
-}
-div.lens-shutter.bottom {
-  bottom: 0;
-}
-div.lens-shutter.bottom div.main {
-  border-top: 1px solid #eee;
+#scrollbar div.scrollbar-block.active {
+  background: red;
+  opacity: 1;
+  margin-left: -3px;
+  padding-right: 3px;
+  z-index: 100;
 }
 .annotator-viewer {
   position: fixed;
