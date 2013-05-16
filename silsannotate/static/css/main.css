@@ -1,6 +1,23 @@
 body {
   line-height: 1.2;
 }
+body div#menubar {
+  position: fixed;
+  width: 200px;
+  background: #fff;
+  text-align: right;
+  padding: 5px;
+  top: 0;
+  right: 30px;
+}
+body div#menubar a {
+  text-decoration: none;
+  font-size: 14px;
+  font-family: helvetica, arial, sans-serif;
+}
+body div#menubar a:hover {
+  text-decoration: underline;
+}
 body div.annotator-wrapper {
   margin: 50px 50px 50px 100px;
 }

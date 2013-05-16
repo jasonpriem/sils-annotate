@@ -1,8 +1,11 @@
 $(document).ready(function(){
 
     // prep the scrollbar:
-    $("body").append("<div id='scrollbar'></div>")
-    scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
+    $("body")
+        .append("<div id='scrollbar'></div>")
+        .append("<div id='menubar'><a class='expand-collapse-all' href='#'><span class='action'>Collapse</span> annotations</a></div>")
+
+
 
 
     var url = window.location.pathname

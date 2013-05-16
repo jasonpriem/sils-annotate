@@ -3,7 +3,6 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
 
-var focusedIds = {}
 
 Annotator.Plugin.Scrollbar = (function(_super) {
 
@@ -20,14 +19,10 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
     Scrollbar.prototype.updateScrollbar = function(annotations) {
 
-        var numAnnotations
-        var lastScrollTop = 0
         var userToShow = false
+        var focusedIds = {}
 
-        // lens is global on purpose, easier debugging...
-        lens = {top: 200, bottom: 400}
-        var viewportHeight = $(window).height()
-        numAnnotations = annotations.length
+        var textContainters$ = $("p,h1,h2,h3,h4,h5,h6")
 
 
 
@@ -195,7 +190,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         }
 
         var writeAnnotationTexts = function() {
-            $("h1,h2,h3,h4,h5,h6,p")
+            textContainters$
                 .append("<div class='anno-display'><ul class='sils-annos'></ul></div>")
                 .each(function(){
                     var annos = getAnnotationsFromSetOfHls($(this));
@@ -205,17 +200,79 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                         renderedAnnosList$.append(renderedAnno)
                     })
 
-                    // make sure there's room for all the rendered annotations
-                    $(this).css({"min-height": renderedAnnosList$.height() + "px"})
+                    resizeTextContainerToFitAnnos($(this))
 
 
 
                 })
+        }
+
+        var resizeTextContainerToFitAnnos = function(container$) {
+            var annoListHeight = container$.find("ul.sils-annos").height()
+            container$.css("min-height", annoListHeight + "px")
+        }
 
 
+        var handleExpandCollapseAll = function() {
+            $("a.expand-collapse-all").click(function(){
+                var action$ = $(this).find("span.action")
+
+                if (action$.text().toLowerCase() == "collapse") {
+                    textContainters$.addClass("collapsed")
+                    action$.text("Expand")
+                }
+                else {
+                    textContainters$.removeClass("collapsed")
+                    action$.text("Collapse")
+                }
+
+                // removing/adding annotions has changed heights for some containers...
+                textContainters$.each(function(){
+                    resizeTextContainerToFitAnnos($(this))
+                })
+
+                drawScrollbarBlocks()
+                return false
+            })
+        }
+
+        var handleExpandCollapseIndividualContainers = function(){
+            $("div.anno-display").click(function(){
+                var parentTextContainer$ = $(this).parents(textContainters$)
+                parentTextContainer$.toggleClass("collapsed")
+                resizeTextContainerToFitAnnos(parentTextContainer$)
+            })
 
         }
 
+        var drawScrollbarBlocks = function(){
+            var scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
+            $("#scrollbar").empty()
+            $("span.annotator-hl").each(function(){
+                var elem$ = $(this)
+                var idClassName = readIdFromClassStr(this.className)
+                $("<div class='scrollbar-block'></div>")
+                    .css(
+                    {
+                        top: (elem$.offset().top * scrollbarScaleFactor) +"px",
+                        height: (elem$.height() * scrollbarScaleFactor) + "px"
+                    }
+                )
+                    .addClass(idClassName)
+                    .appendTo("#scrollbar")
+            })
+        }
+
+        var addIdNamesToHighlights = function() {
+            $("span.annotator-hl").each(function(){
+                var elem$ = $(this)
+                var thisClassName = "id-" + elem$.data().annotation.id
+
+                // add the annotation ID as a class
+                elem$.addClass(thisClassName)
+            })
+
+        }
 
 
 
@@ -226,31 +283,19 @@ Annotator.Plugin.Scrollbar = (function(_super) {
          * procedural code
          **********************************************************************/
 
-        $("span.annotator-hl").each(function(){
-            var elem$ = $(this)
-            var thisClassName = "id-" + elem$.data().annotation.id
 
-            // add the annotation ID as a class
-            elem$.addClass(thisClassName)
-
-            // draw a line on the scrollbar
-            $("<div class='scrollbar-block'></div>")
-                .css(
-                    {
-                    top: (elem$.offset().top * scrollbarScaleFactor) +"px",
-                    height: (elem$.height() * scrollbarScaleFactor) + "px"
-                    }
-                )
-                .addClass(thisClassName)
-                .appendTo("#scrollbar")
-        })
 
         $(".annotator-hl").hover(
             function(){ annoFocus(this) },
             function(){ annoBlur(this) }
         )
 
+        addIdNamesToHighlights()
         writeAnnotationTexts()
+        handleExpandCollapseAll()
+        handleExpandCollapseIndividualContainers()
+        drawScrollbarBlocks()
+
 
     };
 

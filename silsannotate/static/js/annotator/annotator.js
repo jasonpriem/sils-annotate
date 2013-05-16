@@ -237,7 +237,7 @@ Annotator = (function(_super) {
         }
       }
     }
-    annotation.quote = [];
+            annotation.quote = [];
     annotation.ranges = [];
     annotation.highlights = [];
     for (_j = 0, _len2 = normedRanges.length; _j < _len2; _j++) {
