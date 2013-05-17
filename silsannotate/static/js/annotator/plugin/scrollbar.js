@@ -32,17 +32,17 @@ Annotator.Plugin.Scrollbar = (function(_super) {
          * functions
          **********************************************************************/
 
-        var changeHighlightBackgrounds = function(anno, active) {
-            var numHighlights = anno.highlights.length
-            var activeClass = "active"
-            for (var i=0; i < numHighlights; i++ ) {
-                if (active) {
-                    $(anno.highlights[i]).addClass(activeClass)
-                }
-                else {
-                    $(anno.highlights[i]).removeClass(activeClass)
-                }
-            }
+        var handleGlobalControls = function() {
+            $("#menubar a.none").click(function(){
+                $(".annotator-hl, .anno-display, #scrollbar").addClass("hidden")
+                changeControlState($(this), "active")
+                redrawAllAnnoPanes()
+            })
+        }
+
+        var changeControlState = function(control$, state) {
+            var possibleStates = ["ready", "active"]
+            control$.removeClass(possibleStates.join()).addClass(state)
         }
 
         var renderAnno = function(anno) {
@@ -124,62 +124,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             return ret
         }
 
-        var annoIdsWithSmallestTexts = function(ids){
-            var shortestIds = []
-            var shortestLenSoFar = Infinity
-            _.each(ids, function(id){
-                var len = $(".annotator-hl "+id).text().length
-                if (len < shortestLenSoFar) {
-                    shortestLenSoFar = len
-                    shortestIds = [id]
-                }
-                else if (len == shortestLenSoFar) {
-                    shortestIds.push(id)
-                }
-            })
-
-            console.log("shortestIds", shortestIds)
-            return shortestIds
-        }
-
-        var unActivateParentspans = function(){
-
-            // find which unique annotations are highlighted
-            var contentLengths = {}
-
-            $(".active .annotator-hl").each(function(){
-
-                var annoId = readIdFromClassStr(this.className)
-                var thisLength = $(this).text().length
-
-                if (contentLengths[thisLength]) { // we've found something with length before
-                    contentLengths[thisLength].push(annoId)
-                }
-                else { // we've never seen something of this length
-                    contentLengths[thisLength] = [annoId]
-                }
-            })
-
-            // find the shortest contentLength, and its associate IDs
-            var shortest = _.min(_.pairs(contentLengths), function(x){ return x[0]})
-            var shortestIDs = _.uniq(shortest[1])
-            console.log(shortestIDs)
-
-            $(".active .annotator-hl").each(function(){
-                this$ = $(this)
-                if (this$.hasClass(shortestIDs)) {
-                    this$.removeClass("active")
-                }
-            })
-
-        }
-
-
-
-        var findsSmallestPair = function(className) {
-
-        }
-
         var getAnnotationsFromSetOfHls = function(elem$) {
             var annos = {}
             elem$.find(".annotator-hl").each(function(){
@@ -199,18 +143,33 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                         renderedAnnosList$.append(renderedAnno)
                     })
 
-                    resizeTextContainerToFitAnnos($(this))
+                    redrawAnnoPane($(this))
 
 
 
                 })
         }
 
-        var resizeTextContainerToFitAnnos = function(container$) {
+        var redrawAnnoPane = function(container$) {
             var annoListHeight = container$.find("ul.sils-annos").height()
             container$.css("min-height", annoListHeight + "px")
         }
 
+
+        var redrawAllAnnoPanes = function(){
+            textContainters$.each(function(){
+                redrawAnnoPane($(this))
+            })
+            drawScrollbarBlocks()
+        }
+
+        var handleExpandCollapseIndividualContainers = function(){
+            $("div.anno-display").click(function(){
+                var parentTextContainer$ = $(this).parents(textContainters$)
+                parentTextContainer$.toggleClass("collapsed")
+                redrawAnnoPanes(parentTextContainer$)
+            })
+        }
 
         var handleExpandCollapseAll = function() {
             $("a.expand-collapse-all").click(function(){
@@ -226,23 +185,13 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 }
 
                 // removing/adding annotions has changed heights for some containers...
-                textContainters$.each(function(){
-                    resizeTextContainerToFitAnnos($(this))
-                })
+                redrawAnnoPanes()
 
-                drawScrollbarBlocks()
                 return false
             })
         }
 
-        var handleExpandCollapseIndividualContainers = function(){
-            $("div.anno-display").click(function(){
-                var parentTextContainer$ = $(this).parents(textContainters$)
-                parentTextContainer$.toggleClass("collapsed")
-                resizeTextContainerToFitAnnos(parentTextContainer$)
-            })
 
-        }
 
         var drawScrollbarBlocks = function(){
             var scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
@@ -293,6 +242,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         handleExpandCollapseAll()
         handleExpandCollapseIndividualContainers()
         drawScrollbarBlocks()
+        handleGlobalControls()
 
 
     };

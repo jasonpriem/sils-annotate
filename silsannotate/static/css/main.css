@@ -10,9 +10,21 @@ body div#menubar {
   top: 0;
   right: 30px;
 }
+body div#menubar ul {
+  padding: 0;
+  margin: 0;
+}
+body div#menubar ul li {
+  list-style-type: none;
+}
+body div#menubar h3 {
+  margin-bottom: 5px;
+  font-family: helvetica, arial, sans-serif;
+}
 body div#menubar a {
   text-decoration: none;
   font-size: 14px;
+  cursor: pointer;
   font-family: helvetica, arial, sans-serif;
 }
 body div#menubar a:hover {
@@ -29,6 +41,9 @@ body div.annotator-wrapper span.annotator-hl.active {
 }
 body div.annotator-wrapper span.annotator-hl.active span.annotator-hl {
   background: rgba(255, 0, 0, 0.4);
+}
+body div.annotator-wrapper span.annotator-hl.hidden {
+  background: transparent;
 }
 body div.annotator-wrapper .text-container {
   position: relative;
@@ -52,6 +67,9 @@ body div.annotator-wrapper .text-container div.anno-display {
   top: 0;
   left: 650px;
   height: 100%;
+}
+body div.annotator-wrapper .text-container div.anno-display.hidden {
+  display: none;
 }
 body div.annotator-wrapper .text-container div.anno-display ul.sils-annos {
   width: 100%;
@@ -99,6 +117,9 @@ body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li spa
   right: 10px;
   bottom: 0;
   background: #333;
+}
+#scrollbar.hidden {
+  display: none;
 }
 #scrollbar div.scrollbar-block {
   position: fixed;
