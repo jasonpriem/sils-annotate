@@ -1,9 +1,23 @@
 $(document).ready(function(){
 
+
+
+    // mark text containers
+    $("p,h1,h2,h3,h4,h5,h6").addClass("text-container")
+
+
     // prep the scrollbar:
     $("body")
         .append("<div id='scrollbar'></div>")
-        .append("<div id='menubar'><a class='expand-collapse-all' href='#'><span class='action'>Collapse</span> annotations</a></div>")
+        .append("<div id='menubar'>" +
+                        "<a class='disable-annoting'>Disable annotating</a>" +
+                        "<h3>Display style</h3><ul>" +
+                        "<li><a class='display-style none ready'>None</a></li>" +
+                        "<li><a class='display-style icons active'>Icons</a></li>" +
+                        "<li><a class='display-style snippets ready'>Snippets</a></li>" +
+                        "<li><a class='display-style snippets ready'>Full</a></li>" +
+                        "</ul><h3></h3>" +
+                        "</div>")
 
 
 

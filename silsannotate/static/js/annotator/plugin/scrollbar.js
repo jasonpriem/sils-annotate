@@ -22,7 +22,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         var userToShow = false
         var focusedIds = {}
 
-        var textContainters$ = $("p,h1,h2,h3,h4,h5,h6")
+        var textContainters$ = $(".text-container")
 
 
 
@@ -31,7 +31,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         /***********************************************************************
          * functions
          **********************************************************************/
-
 
         var changeHighlightBackgrounds = function(anno, active) {
             var numHighlights = anno.highlights.length
@@ -282,7 +281,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         /***********************************************************************
          * procedural code
          **********************************************************************/
-
 
 
         $(".annotator-hl").hover(
