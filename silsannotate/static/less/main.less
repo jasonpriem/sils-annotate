@@ -7,26 +7,50 @@ body {
       padding: 5px;
       top: 0;
       right: 30px;
+      font-family: Helvetica, arial, sans-serif;
       ul {
          padding: 0;
          margin: 0;
          li {
             list-style-type: none;
+            a {
+               font-size: 14px;
+               text-decoration: none;
+               cursor: pointer;
+               color:  blue;
+               &:hover {
+                  text-decoration: underline;
+               }
+               &.active {
+                  color:  #000;
+                  font-weight: bold;
+                  &:hover {text-decoration: none; cursor: default;}
+               }
+            }
          }
       }
       h3 {
          margin-bottom: 5px;
          font-family: helvetica, arial, sans-serif;
       }
-      a {
-         font-size: 14px;
-         text-decoration: none;
-         font-size: 14px;
-         cursor: pointer;
-         font-family: helvetica, arial, sans-serif;
-         &:hover {
-            text-decoration: underline;
+      span.enable-disable-annotating {
+         font-size: 16px;
+         span.slider {
+            margin-left:5px;
+            a {
+               text-decoration: none;
+               font-weight: bold;
+               margin:0;
+               padding: 5px;
+               &.inactive {background:  #eee; color:  #999;}
+               &.active {
+                  color: #fff;
+                  &.on {background:  green;}
+                  &.off {background:  red;}
+               }
+            }
          }
+
       }
    }
    line-height: 1.2;
@@ -40,15 +64,17 @@ body {
                background: rgba(255, 0, 0, 0.4);
             }
          }
-         &.hidden {
-            background: transparent;
-         }
       }
       .text-container {
          position: relative;
          width: 600px;
 
-         &.collapsed {
+         &.hidden {
+            div.anno-display {display:none;}
+            .annotator-hl {background:transparent;}
+         }
+
+         &.icons {
             div.anno-display {
                ul.sils-annos {
                   li {
@@ -65,6 +91,17 @@ body {
                }
             }
          }
+         &.snippets {
+            div.anno-display {
+               ul.sils-annos {
+                  li {
+                     height: 24px;
+                     min-height: 0;
+                     overflow-y: hidden;
+                  }
+               }
+            }
+         }
 
          div.anno-display{
             clear:both;
@@ -73,9 +110,6 @@ body {
             top: 0;
             left: 650px;
             height: 100%;
-            &.hidden {
-               display:none;
-            }
             ul.sils-annos {
                width: 100%;
                padding: 0;

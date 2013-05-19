@@ -1,22 +1,26 @@
+var enableAnnotation = true
 $(document).ready(function(){
 
 
 
     // mark text containers
-    $("p,h1,h2,h3,h4,h5,h6").addClass("text-container")
+    $("p,h1,h2,h3,h4,h5,h6").addClass("text-container snippets")
 
 
     // prep the scrollbar:
     $("body")
         .append("<div id='scrollbar'></div>")
         .append("<div id='menubar'>" +
-                        "<a class='disable-annoting'>Disable annotating</a>" +
-                        "<h3>Display style</h3><ul>" +
-                        "<li><a class='display-style none ready'>None</a></li>" +
-                        "<li><a class='display-style icons active'>Icons</a></li>" +
-                        "<li><a class='display-style snippets ready'>Snippets</a></li>" +
-                        "<li><a class='display-style snippets ready'>Full</a></li>" +
-                        "</ul><h3></h3>" +
+                        "<h3>Annotation display</h3><ul class='enable-disable-annotation'>" +
+                            "<li><a class='on active'>On</a></li>" +
+                            "<li><a class='off ready'>Off</a></li>" +
+                        "</ul>" +
+                        "<h3>Display style</h3><ul class='display-style'>" +
+                            "<li><a class='display-style hidden ready'>Hidden</a></li>" +
+                            "<li><a class='display-style icons ready'>Icons</a></li>" +
+                            "<li><a class='display-style snippets active'>Snippets</a></li>" +
+                            "<li><a class='display-style full ready'>Full</a></li>" +
+                        "</ul>" +
                         "</div>")
 
 

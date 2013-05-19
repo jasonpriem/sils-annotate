@@ -23,7 +23,9 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         var focusedIds = {}
 
         var textContainters$ = $(".text-container")
-
+        var displayStyles = ["hidden", "icons", "snippets", "full"]
+        var annotationState = ["enabled", "disabled"]
+        var displayState = "snippets"
 
 
 
@@ -33,16 +35,35 @@ Annotator.Plugin.Scrollbar = (function(_super) {
          **********************************************************************/
 
         var handleGlobalControls = function() {
-            $("#menubar a.none").click(function(){
-                $(".annotator-hl, .anno-display, #scrollbar").addClass("hidden")
-                changeControlState($(this), "active")
-                redrawAllAnnoPanes()
+            $("#menubar a.display-style").click(function(){
+                var newState = _.intersection(displayStyles, this.className.split(" "))[0]
+                changeGlobalDisplayState(newState)
+            })
+
+            $("#menubar ul.enable-disable-annotation a").click(function(){
+                enableDisableAnnotation()
             })
         }
 
-        var changeControlState = function(control$, state) {
-            var possibleStates = ["ready", "active"]
-            control$.removeClass(possibleStates.join()).addClass(state)
+        var enableDisableAnnotation = function() {
+            enableAnnotation = !enableAnnotation
+            $("#menubar ul.enable-disable-annotation a")
+                .toggleClass("active")
+                .toggleClass("ready")
+        }
+
+        var changeGlobalDisplayState = function(newState){
+            $("#menubar a.display-style")
+                .removeClass("active")
+                .filter("." + newState)
+                .addClass("active")
+
+            textContainters$
+                .add("#scrollbar")
+                .removeClass(displayStyles.join(" "))
+                .addClass(newState)
+
+            redrawAllAnnoPanes()
         }
 
         var renderAnno = function(anno) {

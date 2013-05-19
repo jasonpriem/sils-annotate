@@ -9,6 +9,7 @@ body div#menubar {
   padding: 5px;
   top: 0;
   right: 30px;
+  font-family: Helvetica, arial, sans-serif;
 }
 body div#menubar ul {
   padding: 0;
@@ -17,18 +18,51 @@ body div#menubar ul {
 body div#menubar ul li {
   list-style-type: none;
 }
+body div#menubar ul li a {
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  color: blue;
+}
+body div#menubar ul li a:hover {
+  text-decoration: underline;
+}
+body div#menubar ul li a.active {
+  color: #000;
+  font-weight: bold;
+}
+body div#menubar ul li a.active:hover {
+  text-decoration: none;
+  cursor: default;
+}
 body div#menubar h3 {
   margin-bottom: 5px;
   font-family: helvetica, arial, sans-serif;
 }
-body div#menubar a {
-  text-decoration: none;
-  font-size: 14px;
-  cursor: pointer;
-  font-family: helvetica, arial, sans-serif;
+body div#menubar span.enable-disable-annotating {
+  font-size: 16px;
 }
-body div#menubar a:hover {
-  text-decoration: underline;
+body div#menubar span.enable-disable-annotating span.slider {
+  margin-left: 5px;
+}
+body div#menubar span.enable-disable-annotating span.slider a {
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0;
+  padding: 5px;
+}
+body div#menubar span.enable-disable-annotating span.slider a.inactive {
+  background: #eee;
+  color: #999;
+}
+body div#menubar span.enable-disable-annotating span.slider a.active {
+  color: #fff;
+}
+body div#menubar span.enable-disable-annotating span.slider a.active.on {
+  background: green;
+}
+body div#menubar span.enable-disable-annotating span.slider a.active.off {
+  background: red;
 }
 body div.annotator-wrapper {
   margin: 50px 50px 50px 100px;
@@ -42,23 +76,31 @@ body div.annotator-wrapper span.annotator-hl.active {
 body div.annotator-wrapper span.annotator-hl.active span.annotator-hl {
   background: rgba(255, 0, 0, 0.4);
 }
-body div.annotator-wrapper span.annotator-hl.hidden {
-  background: transparent;
-}
 body div.annotator-wrapper .text-container {
   position: relative;
   width: 600px;
 }
-body div.annotator-wrapper .text-container.collapsed div.anno-display ul.sils-annos li {
+body div.annotator-wrapper .text-container.hidden div.anno-display {
+  display: none;
+}
+body div.annotator-wrapper .text-container.hidden .annotator-hl {
+  background: transparent;
+}
+body div.annotator-wrapper .text-container.icons div.anno-display ul.sils-annos li {
   width: auto;
   clear: none;
   float: left;
 }
-body div.annotator-wrapper .text-container.collapsed div.anno-display ul.sils-annos li span.text {
+body div.annotator-wrapper .text-container.icons div.anno-display ul.sils-annos li span.text {
   display: none;
 }
-body div.annotator-wrapper .text-container.collapsed div.anno-display ul.sils-annos li img {
+body div.annotator-wrapper .text-container.icons div.anno-display ul.sils-annos li img {
   margin-right: 2px;
+}
+body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li {
+  height: 24px;
+  min-height: 0;
+  overflow-y: hidden;
 }
 body div.annotator-wrapper .text-container div.anno-display {
   clear: both;
@@ -67,9 +109,6 @@ body div.annotator-wrapper .text-container div.anno-display {
   top: 0;
   left: 650px;
   height: 100%;
-}
-body div.annotator-wrapper .text-container div.anno-display.hidden {
-  display: none;
 }
 body div.annotator-wrapper .text-container div.anno-display ul.sils-annos {
   width: 100%;
