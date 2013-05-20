@@ -24,7 +24,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var textContainters$ = $(".text-container")
         var displayStyles = ["hidden", "icons", "snippets", "full"]
-        var annotationState = ["enabled", "disabled"]
         var displayState = "snippets"
 
 
@@ -41,11 +40,17 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             })
 
             $("#menubar ul.enable-disable-annotation a").click(function(){
+                if ($(this).hasClass("disabled")) return false
                 enableDisableAnnotation()
             })
         }
 
+        var getCurrentDisplayState = function(){
+            return _.intersection(displayStyles, $("#menubar a.active")[0].className.split(" "))[0]
+        }
+
         var enableDisableAnnotation = function() {
+            console.log("enabling/disabling annotations")
             enableAnnotation = !enableAnnotation
             $("#menubar ul.enable-disable-annotation a")
                 .toggleClass("active")
@@ -53,6 +58,10 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         }
 
         var changeGlobalDisplayState = function(newState){
+
+            if ($("#menubar a.hidden").hasClass("active")) enableDisableAnnotation()
+
+
             $("#menubar a.display-style")
                 .removeClass("active")
                 .filter("." + newState)
@@ -64,6 +73,17 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 .addClass(newState)
 
             redrawAllAnnoPanes()
+
+            // if annotations are hidden, you can't make new ones
+            if ($("#menubar a.hidden").hasClass("active")) {
+                $("#menubar ul.enable-disable-annotation a").addClass("disabled")
+                if (enableAnnotation) {
+                    enableDisableAnnotation()
+                }
+            }
+            else {
+                $("#menubar ul.enable-disable-annotation a").removeClass("disabled")
+            }
         }
 
         var renderAnno = function(anno) {
@@ -100,7 +120,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var activateShortestId = function(){
             // find which ids have the shortest length (array b/c ties are allowed)
-            console.log("in activateShortestIds. Here are the focusedIds:", focusedIds)
             var shortestIds = []
             var shortestLenSoFar = Infinity
             _.each(focusedIds, function(len, id){
@@ -113,7 +132,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 }
             })
 
-            console.log("in activateShortestIds. Here are the shortestIds", shortestIds)
 
             $(".text-container .active, #scrollbar .active").removeClass("active")
             if (!shortestIds.length) return false
@@ -124,10 +142,8 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var annoBlur = function(e) {
             var annoId = readIdFromClassStr(e.className)
-            console.log("focusedIds before blur action:", focusedIds)
             delete focusedIds[annoId]
             activateShortestId()
-            console.log("focusedIds antes de blur action:", focusedIds)
 
         }
 
@@ -163,11 +179,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                         var renderedAnno = renderAnno(anno)
                         renderedAnnosList$.append(renderedAnno)
                     })
-
                     redrawAnnoPane($(this))
-
-
-
                 })
         }
 
@@ -191,28 +203,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 redrawAnnoPanes(parentTextContainer$)
             })
         }
-
-        var handleExpandCollapseAll = function() {
-            $("a.expand-collapse-all").click(function(){
-                var action$ = $(this).find("span.action")
-
-                if (action$.text().toLowerCase() == "collapse") {
-                    textContainters$.addClass("collapsed")
-                    action$.text("Expand")
-                }
-                else {
-                    textContainters$.removeClass("collapsed")
-                    action$.text("Collapse")
-                }
-
-                // removing/adding annotions has changed heights for some containers...
-                redrawAnnoPanes()
-
-                return false
-            })
-        }
-
-
 
         var drawScrollbarBlocks = function(){
             var scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
@@ -260,8 +250,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         addIdNamesToHighlights()
         writeAnnotationTexts()
-        handleExpandCollapseAll()
-        handleExpandCollapseIndividualContainers()
+//        handleExpandCollapseIndividualContainers()
         drawScrollbarBlocks()
         handleGlobalControls()
 

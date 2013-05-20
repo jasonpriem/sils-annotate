@@ -11,17 +11,23 @@ $(document).ready(function(){
     $("body")
         .append("<div id='scrollbar'></div>")
         .append("<div id='menubar'>" +
-                        "<h3>Annotation display</h3><ul class='enable-disable-annotation'>" +
-                            "<li><a class='on active'>On</a></li>" +
-                            "<li><a class='off ready'>Off</a></li>" +
-                        "</ul>" +
-                        "<h3>Display style</h3><ul class='display-style'>" +
-                            "<li><a class='display-style hidden ready'>Hidden</a></li>" +
-                            "<li><a class='display-style icons ready'>Icons</a></li>" +
-                            "<li><a class='display-style snippets active'>Snippets</a></li>" +
-                            "<li><a class='display-style full ready'>Full</a></li>" +
-                        "</ul>" +
-                        "</div>")
+                        "<div class='submenu enable-annotation'>" +
+                            "<h3>Annotation display</h3>" +
+                            "<ul class='enable-disable-annotation'>" +
+                                "<li><a class='on active'>On</a></li>" +
+                                "<li><a class='off ready'>Off</a></li>" +
+                            "</ul>" +
+                        "</div>" +
+                        "<div class='submenu display-style'>" +
+                            "<h3>Display style</h3>" +
+                            "<ul class='display-style'>" +
+                                "<li><a class='display-style hidden ready'>Hidden</a></li>" +
+                                "<li><a class='display-style icons ready'>Icons</a></li>" +
+                                "<li><a class='display-style snippets active'>Snippets</a></li>" +
+                                "<li><a class='display-style full ready'>Full</a></li>" +
+                            "</ul>" +
+                        "</div>" +
+                    "</div>")
 
 
 
