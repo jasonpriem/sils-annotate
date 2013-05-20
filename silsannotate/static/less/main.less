@@ -1,3 +1,5 @@
+@snippetHeight: 23px;
+
 body {
    div#menubar {
       position: fixed;
@@ -107,9 +109,31 @@ body {
             div.anno-display {
                ul.sils-annos {
                   li {
-                     height: 24px;
+                     height: @snippetHeight;
                      min-height: 0;
                      overflow-y: hidden;
+                     position: relative;
+                     padding-left:8px;
+                     &.long{
+                        div.more-indicator {
+                           display: block;
+                           float:left;
+                           position: absolute;
+                           left: 0;
+                           font-size: 12px;
+                        }
+                        div.mask {
+                           background: url(../img/gradient-mask.png) bottom right;
+                           bottom: 0;
+                           right: 0;
+                           position: absolute;
+                           height: 16px;
+                           width: 200px;
+                        }
+                        &:hover {
+                           div.mask { background: transparent;}
+                        }
+                     }
                   }
                }
             }
@@ -133,7 +157,7 @@ body {
                   padding: 2px 2px 5px 2px;
                   min-height: 25px;
                   font-weight: normal;
-                  margin: 1px 0 0 0;
+                  margin: 1px 0 3px 0;
                   clear:both;
                   list-style-type: none;
                   border-radius: 6px;
@@ -145,7 +169,7 @@ body {
                      background: lightpink;
 
                   }
-
+                  div.more-indicator {display:none;}
                   img {
                      margin-right: 5px;
                      height: 24px;

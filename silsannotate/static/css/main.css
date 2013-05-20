@@ -104,9 +104,29 @@ body div.annotator-wrapper .text-container.icons div.anno-display ul.sils-annos 
   margin-right: 2px;
 }
 body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li {
-  height: 24px;
+  height: 23px;
   min-height: 0;
   overflow-y: hidden;
+  position: relative;
+  padding-left: 8px;
+}
+body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long div.more-indicator {
+  display: block;
+  float: left;
+  position: absolute;
+  left: 0;
+  font-size: 12px;
+}
+body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long div.mask {
+  background: url(../img/gradient-mask.png) bottom right;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  height: 16px;
+  width: 200px;
+}
+body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long:hover div.mask {
+  background: transparent;
 }
 body div.annotator-wrapper .text-container div.anno-display {
   clear: both;
@@ -127,7 +147,7 @@ body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li {
   padding: 2px 2px 5px 2px;
   min-height: 25px;
   font-weight: normal;
-  margin: 1px 0 0 0;
+  margin: 1px 0 3px 0;
   clear: both;
   list-style-type: none;
   border-radius: 6px;
@@ -138,6 +158,9 @@ body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li.act
 }
 body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li.active img {
   border: 1px solid red;
+}
+body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li div.more-indicator {
+  display: none;
 }
 body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li img {
   margin-right: 5px;

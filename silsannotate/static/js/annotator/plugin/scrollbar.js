@@ -24,7 +24,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var textContainters$ = $(".text-container")
         var displayStyles = ["hidden", "icons", "snippets", "full"]
-        var displayState = "snippets"
+        var snippetHeight = 30 // super brittle
 
 
 
@@ -91,10 +91,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
 
             var idClass = "id-" + anno._id
-            var annoLi$ = $('<li class="sils-anno ' + idClass + ' ' + anno.userId + '"><span class="text"></span></li>')
+            var annoLi$ = $('<li class="sils-anno ' + idClass + ' ' + anno.userId + '"><span class="text"></span><div class="mask"></div></li>')
             var userIconUrl = "/static/img/users/" + anno.userId + ".png"
             var userIcon = $('<img src="'+ userIconUrl +'">')
             annoLi$.prepend(userIcon)
+            annoLi$.prepend("<div class='more-indicator'>+</div>")
             annoLi$.find("span.text").append(anno.text)
             annoLi$.hover(
                 function(){$("."+idClass).addClass("active")},
@@ -233,6 +234,14 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         }
 
+        var markLongAnnotations = function() {
+            $("li.sils-anno").each(function(){
+                if ($(this).find("span.text")[0].clientHeight > snippetHeight) {
+                    $(this).addClass("long")
+                }
+            })
+        }
+
 
 
 
@@ -253,6 +262,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 //        handleExpandCollapseIndividualContainers()
         drawScrollbarBlocks()
         handleGlobalControls()
+        markLongAnnotations()
 
 
     };
