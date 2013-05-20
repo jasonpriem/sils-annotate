@@ -3,18 +3,22 @@
 body {
    div#menubar {
       position: fixed;
+      z-index: 100;
       width: 200px;
-      background: #fff;
       text-align: right;
       top: 0;
-      right: 30px;
+      right: 35px;
       width:  600px;
       font-family: Helvetica, arial, sans-serif;
       border-top: none;
       position: fixed;
       height: 20px;
-      background: #fff;
       div.submenu {
+         background: #fff;
+         opacity: .8;
+         &:hover {
+            opacity: 1;
+         }
          border: 1px solid #333;
          border-top: none;
          box-shadow: 0 0px 5px #333;
@@ -129,8 +133,8 @@ body {
                               bottom: 0;
                               right: 0;
                               position: absolute;
-                              height: 16px;
-                              width: 200px;
+                              height: 20px;
+                              width: 100%;
                            }
                         }
                         &:hover {
@@ -154,6 +158,14 @@ body {
                padding: 0;
                margin: -3px 0 5px 5px;
                padding-top: 4px;
+               &.active {
+                  li{
+                     background: #fff;
+                     z-index: 10;
+                  }
+                  li:last-child {
+                  }
+               }
 
                li {
                   width: 100%;
@@ -170,7 +182,13 @@ body {
                         border: 1px solid red;
                      }
                      background: lightpink;
-
+                     &.long {
+                        &.extra-long {
+                           height: auto;
+                           div.mask {display:none;}
+                           div.more-indicator { display:none;}
+                        }
+                     }
                   }
                   div.more-indicator {display:none;}
                   img {
@@ -188,6 +206,10 @@ body {
                      font-size: 11px;
                      display:block;
                      margin-left: 3px;
+                     span.username {
+                        font-weight: bold;
+                        margin-right: 4px;
+                     }
                   }
                }
             }
@@ -197,7 +219,7 @@ body {
 }
 
 #scrollbar {
-   width: 15px;
+   width: 24px;
    position: fixed;
    top:0;
    right:10px;
@@ -210,7 +232,7 @@ body {
       position:fixed;
       opacity: .3;
       background: yellow;
-      width: 15px;
+      width: 25px;
       &.active {
          background: red;
          opacity: 1;

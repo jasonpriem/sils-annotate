@@ -2,18 +2,20 @@ body {
   line-height: 1.2;
 }
 body div#menubar {
+  z-index: 100;
   width: 200px;
   text-align: right;
   top: 0;
-  right: 30px;
+  right: 35px;
   width: 600px;
   font-family: Helvetica, arial, sans-serif;
   border-top: none;
   position: fixed;
   height: 20px;
-  background: #fff;
 }
 body div#menubar div.submenu {
+  background: #fff;
+  opacity: .8;
   border: 1px solid #333;
   border-top: none;
   box-shadow: 0 0px 5px #333;
@@ -22,6 +24,9 @@ body div#menubar div.submenu {
   padding-right: 5px;
   height: 20px;
   float: right;
+}
+body div#menubar div.submenu:hover {
+  opacity: 1;
 }
 body div#menubar div.submenu.enable-annotation {
   margin-left: 15px;
@@ -125,8 +130,8 @@ body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-ann
   bottom: 0;
   right: 0;
   position: absolute;
-  height: 16px;
-  width: 200px;
+  height: 20px;
+  width: 100%;
 }
 body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long:hover div.mask {
   background: transparent;
@@ -145,6 +150,10 @@ body div.annotator-wrapper .text-container div.anno-display ul.sils-annos {
   margin: -3px 0 5px 5px;
   padding-top: 4px;
 }
+body div.annotator-wrapper .text-container div.anno-display ul.sils-annos.active li {
+  background: #fff;
+  z-index: 10;
+}
 body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li {
   width: 100%;
   padding: 2px 2px 5px 2px;
@@ -161,6 +170,15 @@ body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li.act
 }
 body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li.active img {
   border: 1px solid red;
+}
+body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li.active.long.extra-long {
+  height: auto;
+}
+body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li.active.long.extra-long div.mask {
+  display: none;
+}
+body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li.active.long.extra-long div.more-indicator {
+  display: none;
 }
 body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li div.more-indicator {
   display: none;
@@ -181,8 +199,12 @@ body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li spa
   display: block;
   margin-left: 3px;
 }
+body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li span.text span.username {
+  font-weight: bold;
+  margin-right: 4px;
+}
 #scrollbar {
-  width: 15px;
+  width: 24px;
   position: fixed;
   top: 0;
   right: 10px;
@@ -196,7 +218,7 @@ body div.annotator-wrapper .text-container div.anno-display ul.sils-annos li spa
   position: fixed;
   opacity: .3;
   background: yellow;
-  width: 15px;
+  width: 25px;
 }
 #scrollbar div.scrollbar-block.active {
   background: red;
