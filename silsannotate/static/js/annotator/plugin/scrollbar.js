@@ -236,8 +236,13 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var markLongAnnotations = function() {
             $("li.sils-anno").each(function(){
-                if ($(this).find("span.text")[0].clientHeight > snippetHeight) {
+                var this$ = $(this)
+                var textHeight = this$.find("span.text")[0].clientHeight
+                if (textHeight > snippetHeight) {
                     $(this).addClass("long")
+                    if (textHeight > (snippetHeight + 13)) {
+                        this$.addClass("extra-long")
+                    }
                 }
             })
         }

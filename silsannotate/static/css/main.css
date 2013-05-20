@@ -110,14 +110,17 @@ body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-ann
   position: relative;
   padding-left: 8px;
 }
-body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long div.more-indicator {
+body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long {
+  height: 35px;
+}
+body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long.extra-long div.more-indicator {
   display: block;
   float: left;
   position: absolute;
   left: 0;
   font-size: 12px;
 }
-body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long div.mask {
+body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long.extra-long div.mask {
   background: url(../img/gradient-mask.png) bottom right;
   bottom: 0;
   right: 0;

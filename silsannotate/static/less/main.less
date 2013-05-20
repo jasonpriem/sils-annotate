@@ -115,20 +115,23 @@ body {
                      position: relative;
                      padding-left:8px;
                      &.long{
-                        div.more-indicator {
-                           display: block;
-                           float:left;
-                           position: absolute;
-                           left: 0;
-                           font-size: 12px;
-                        }
-                        div.mask {
-                           background: url(../img/gradient-mask.png) bottom right;
-                           bottom: 0;
-                           right: 0;
-                           position: absolute;
-                           height: 16px;
-                           width: 200px;
+                        height: @snippetHeight + 12;
+                        &.extra-long {
+                           div.more-indicator {
+                              display: block;
+                              float:left;
+                              position: absolute;
+                              left: 0;
+                              font-size: 12px;
+                           }
+                           div.mask {
+                              background: url(../img/gradient-mask.png) bottom right;
+                              bottom: 0;
+                              right: 0;
+                              position: absolute;
+                              height: 16px;
+                              width: 200px;
+                           }
                         }
                         &:hover {
                            div.mask { background: transparent;}
