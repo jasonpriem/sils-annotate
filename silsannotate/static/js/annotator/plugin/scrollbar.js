@@ -115,7 +115,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
             console.log("in activateShortestIds. Here are the shortestIds", shortestIds)
 
-            $(".active").removeClass("active")
+            $(".text-container .active").removeClass("active")
             if (!shortestIds.length) return false
             var activeIdsSelector = "."+shortestIds.join(", .")
             $(activeIdsSelector).addClass("active")

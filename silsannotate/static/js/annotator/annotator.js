@@ -115,6 +115,7 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype._setupViewer = function() {
+
     var _this = this;
     this.viewer = new Annotator.Viewer({
       readOnly: this.options.readOnly
@@ -136,6 +137,7 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype._setupEditor = function() {
+
     this.editor = new Annotator.Editor();
     this.editor.hide().on('hide', this.onEditorHide).on('save', this.onEditorSubmit).addField({
       type: 'textarea',
@@ -386,6 +388,9 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.checkForStartSelection = function(event) {
+
+    if (!enableAnnotation) return true
+
     if (!(event && this.isAnnotator(event.target))) {
       this.startViewerHideTimer();
       return this.mouseIsDown = true;
@@ -393,6 +398,10 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.checkForEndSelection = function(event) {
+
+    if (!enableAnnotation) return true
+
+
     var container, range, _i, _len, _ref;
     this.mouseIsDown = false;
     if (this.ignoreMouseup) return;
