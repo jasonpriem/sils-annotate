@@ -24,6 +24,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var textContainters$ = $(".text-container")
         var displayStyles = ["hidden", "icons", "snippets", "full"]
+        var nextDisplayStyle = {
+            "icons": "snippets",
+            "snippets": "full",
+            "full": "full"
+        }
         var snippetHeight = 30 // super brittle
 
 
@@ -45,9 +50,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             })
         }
 
-        var getCurrentDisplayState = function(){
-            return _.intersection(displayStyles, $("#menubar a.active")[0].className.split(" "))[0]
-        }
 
         var enableDisableAnnotation = function() {
             console.log("enabling/disabling annotations")
@@ -107,12 +109,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 function(){$("."+idClass).removeClass("active").parents("ul.sils-anno").removeClass("active")}
             )
             return annoLi$
-
-        }
-
-        var showAnnoText = function(activeIdsSelector){
-            var text = thisLi$.find(activeIdsSelector).find("span.text").clone()
-            thisLi$.find("div.sample-text").append(text)
 
         }
 
@@ -186,8 +182,22 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         }
 
         var writeAnnotationTexts = function() {
+
+            var textContainerContents = (
+                "<div class='anno-display'>"
+                    + "<ul class='container-states'>"
+                            + "<li class='icons ready'>Icons</li>"
+                            + "<li class='sep'>&middot;</li>"
+                            + "<li class='snippets active'>Snippets</li>"
+                            + "<li class='sep'>&middot;</li>"
+                            + "<li class='full ready'>Full</li>"
+                    + "</ul>"
+                    + "<ul class='sils-annos'></ul>"
+                + "</div>")
+
+
             textContainters$
-                .append("<div class='anno-display'><ul class='sils-annos'></ul><div class='sample-text'></div></div>")
+                .append(textContainerContents)
                 .each(function(){
                     var annos = getAnnotationsFromSetOfHls($(this));
                     var renderedAnnosList$ = $(this).find("ul.sils-annos")
@@ -195,12 +205,14 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                         var renderedAnno = renderAnno(anno)
                         renderedAnnosList$.append(renderedAnno)
                     })
-//                    redrawAnnoPane($(this))
+                    if (annos.length === 0) $(this).addClass("no-annos")
+
                 })
         }
 
         var redrawAnnoPane = function(container$) {
             var annoListHeight = container$.find("ul.sils-annos").height()
+            if (annoListHeight > 0) annoListHeight += 30
             container$.css("min-height", annoListHeight + "px")
         }
 
@@ -212,13 +224,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             drawScrollbarBlocks()
         }
 
-        var handleExpandCollapseIndividualContainers = function(){
-            $("div.anno-display").click(function(){
-                var parentTextContainer$ = $(this).parents(textContainters$)
-                parentTextContainer$.toggleClass("collapsed")
-                redrawAnnoPanes(parentTextContainer$)
-            })
-        }
 
         var drawScrollbarBlocks = function(){
             var scrollbarScaleFactor = $("#scrollbar").height() / $("html").height()
@@ -271,6 +276,24 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             })
         }
 
+        var changeDisplayForTextContainers = function() {
+            $(".annotator-hl").click(function(){
+                var currentState = _.intersection(
+                    displayStyles,
+                    $(this).parents(".text-container")[0].className.split(" ")
+                )[0]
+                var newState = nextDisplayStyle[currentState]
+
+                $(this).parents(".text-container")
+                    .removeClass(displayStyles.join(" "))
+                    .addClass(newState)
+            })
+
+        }
+
+
+
+
 
 
 
@@ -288,11 +311,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         addIdNamesToHighlights()
         writeAnnotationTexts()
-//        handleExpandCollapseIndividualContainers()
         handleGlobalControls()
         markLongAnnotations()
         scrollbarClickChangesLocation()
         redrawAllAnnoPanes()
+        changeDisplayForTextContainers()
 
 
     };
