@@ -159,6 +159,13 @@ body div.annotator-wrapper .text-container div.anno-display ul.container-states 
   list-style-type: none;
   margin-right: 5px;
 }
+body div.annotator-wrapper .text-container div.anno-display ul.container-states li.active {
+  color: #555;
+  font-weight: bold;
+}
+body div.annotator-wrapper .text-container div.anno-display ul.container-states li:hover {
+  text-decoration: underline;
+}
 body div.annotator-wrapper .text-container div.anno-display ul.sils-annos {
   width: 100%;
   padding: 0;

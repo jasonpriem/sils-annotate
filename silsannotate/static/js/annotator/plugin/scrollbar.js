@@ -183,21 +183,34 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var writeAnnotationTexts = function() {
 
-            var textContainerContents = (
+            var textContainerContents$ = $(
                 "<div class='anno-display'>"
                     + "<ul class='container-states'>"
-                            + "<li class='icons ready'>Icons</li>"
+                            + "<li class='state icons ready'>Icons</li>"
                             + "<li class='sep'>&middot;</li>"
-                            + "<li class='snippets active'>Snippets</li>"
+                            + "<li class='state snippets active'>Snippets</li>"
                             + "<li class='sep'>&middot;</li>"
-                            + "<li class='full ready'>Full</li>"
+                            + "<li class='state full ready'>Full</li>"
                     + "</ul>"
                     + "<ul class='sils-annos'></ul>"
                 + "</div>")
+            textContainerContents$.find("li.state").click(function(){
+                var newState = _.intersection(
+                    displayStyles,
+                    this.className.split(" ")
+                )[0]
+
+                console.log("new state: ", newState)
+
+                $(this).parents(".text-container")
+                    .removeClass(displayStyles.join(" "))
+                    .addClass(newState)
+            })
+
 
 
             textContainters$
-                .append(textContainerContents)
+                .append(textContainerContents$)
                 .each(function(){
                     var annos = getAnnotationsFromSetOfHls($(this));
                     var renderedAnnosList$ = $(this).find("ul.sils-annos")
