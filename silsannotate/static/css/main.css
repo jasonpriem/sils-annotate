@@ -90,6 +90,10 @@ body div.annotator-wrapper .text-container.hidden div.anno-display {
 body div.annotator-wrapper .text-container.hidden .annotator-hl {
   background: transparent;
 }
+body div.annotator-wrapper .text-container.icons div.anno-display ul.container-states li.icons {
+  color: #333;
+  font-weight: bold;
+}
 body div.annotator-wrapper .text-container.icons div.anno-display ul.sils-annos li {
   width: auto;
   clear: none;
@@ -100,6 +104,10 @@ body div.annotator-wrapper .text-container.icons div.anno-display ul.sils-annos 
 }
 body div.annotator-wrapper .text-container.icons div.anno-display ul.sils-annos li img {
   margin-right: 2px;
+}
+body div.annotator-wrapper .text-container.snippets div.anno-display ul.container-states li.snippets {
+  color: #333;
+  font-weight: bold;
 }
 body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li {
   height: 23px;
@@ -128,6 +136,10 @@ body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-ann
 }
 body div.annotator-wrapper .text-container.snippets div.anno-display ul.sils-annos li.long:hover div.mask {
   background: transparent;
+}
+body div.annotator-wrapper .text-container.full div.anno-display ul.container-states li.full {
+  color: #333;
+  font-weight: bold;
 }
 body div.annotator-wrapper .text-container.no-annos ul.container-states {
   display: none;
@@ -159,12 +171,11 @@ body div.annotator-wrapper .text-container div.anno-display ul.container-states 
   list-style-type: none;
   margin-right: 5px;
 }
-body div.annotator-wrapper .text-container div.anno-display ul.container-states li.active {
-  color: #555;
-  font-weight: bold;
+body div.annotator-wrapper .text-container div.anno-display ul.container-states li.state {
+  cursor: pointer;
 }
-body div.annotator-wrapper .text-container div.anno-display ul.container-states li:hover {
-  text-decoration: underline;
+body div.annotator-wrapper .text-container div.anno-display ul.container-states li.state:hover {
+  border-top: 1px solid #ccc;
 }
 body div.annotator-wrapper .text-container div.anno-display ul.sils-annos {
   width: 100%;

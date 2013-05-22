@@ -90,6 +90,9 @@ body {
 
          &.icons {
             div.anno-display {
+               ul.container-states {
+                  li.icons { color:  #333; font-weight: bold;}
+               }
                ul.sils-annos {
                   li {
                      width: auto;
@@ -107,6 +110,9 @@ body {
          }
          &.snippets {
             div.anno-display {
+               ul.container-states {
+                  li.snippets { color:  #333; font-weight: bold;}
+               }
                ul.sils-annos {
                   li {
                      height: @snippetHeight;
@@ -141,6 +147,13 @@ body {
                }
             }
          }
+         &.full {
+            div.anno-display {
+               ul.container-states {
+                  li.full { color:  #333; font-weight: bold;}
+               }
+            }
+         }
          &.no-annos {
             ul.container-states {display:none;}
             div.anno-display {
@@ -162,9 +175,11 @@ body {
                   display:inline;
                   list-style-type: none;
                   margin-right: 5px;
-                  &.active { color:  #555; font-weight: bold;}
-                  &:hover {
-                     text-decoration: underline;
+                  &.state {
+                     cursor: pointer;
+                     &:hover {
+                        border-top:  1px solid #ccc;
+                     }
                   }
                }
             }

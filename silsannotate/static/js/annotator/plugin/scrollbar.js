@@ -186,25 +186,27 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             var textContainerContents$ = $(
                 "<div class='anno-display'>"
                     + "<ul class='container-states'>"
-                            + "<li class='state icons ready'>Icons</li>"
+                            + "<li class='state icons'>Icons</li>"
                             + "<li class='sep'>&middot;</li>"
-                            + "<li class='state snippets active'>Snippets</li>"
+                            + "<li class='state snippets'>Snippets</li>"
                             + "<li class='sep'>&middot;</li>"
-                            + "<li class='state full ready'>Full</li>"
+                            + "<li class='state full'>Full</li>"
                     + "</ul>"
                     + "<ul class='sils-annos'></ul>"
                 + "</div>")
             textContainerContents$.find("li.state").click(function(){
+                var parentContainer$ = $(this).parents(".text-container")
                 var newState = _.intersection(
                     displayStyles,
                     this.className.split(" ")
                 )[0]
 
-                console.log("new state: ", newState)
-
-                $(this).parents(".text-container")
+                parentContainer$
                     .removeClass(displayStyles.join(" "))
                     .addClass(newState)
+
+                redrawAnnoPane(parentContainer$)
+
             })
 
 
@@ -290,16 +292,14 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         }
 
         var changeDisplayForTextContainers = function() {
+            // @todo: totally broken; should use the writeAnnotations() function, which'd need
+            // to be modified to take param of where.
+
             $(".annotator-hl").click(function(){
-                var currentState = _.intersection(
-                    displayStyles,
-                    $(this).parents(".text-container")[0].className.split(" ")
-                )[0]
-                var newState = nextDisplayStyle[currentState]
 
                 $(this).parents(".text-container")
                     .removeClass(displayStyles.join(" "))
-                    .addClass(newState)
+                    .addClass("snippets")
             })
 
         }
@@ -328,7 +328,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         markLongAnnotations()
         scrollbarClickChangesLocation()
         redrawAllAnnoPanes()
-        changeDisplayForTextContainers()
 
 
     };
