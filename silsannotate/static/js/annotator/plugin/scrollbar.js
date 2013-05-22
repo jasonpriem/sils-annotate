@@ -105,8 +105,13 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             annoLi$.prepend("<div class='more-indicator'>+</div>")
             annoLi$.find("span.text").append(anno.text)
             annoLi$.hover(
-                function(){$("."+idClass).addClass("active").parents("ul.sils-annos").addClass("active")},
-                function(){$("."+idClass).removeClass("active").parents("ul.sils-anno").removeClass("active")}
+                function(){
+                    $("."+idClass).addClass("active").parents("ul.sils-annos").addClass("active")
+                    console.log("hoving to activate idClass", idClass)
+                },
+                function(){
+                    $("."+idClass).removeClass("active").parents("ul.sils-anno").removeClass("active")
+                }
             )
             return annoLi$
 
@@ -144,7 +149,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             $(".text-container .active, #scrollbar .active").removeClass("active")
             if (!shortestIds.length) return false
             var activeIdsSelector = "."+shortestIds.join(", .")
-            $(activeIdsSelector).addClass("active")
+            $(activeIdsSelector).find(".annotator-hl").andSelf().addClass("active")
         }
 
 
@@ -258,13 +263,20 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             })
         }
 
-        var addIdNamesToHighlights = function() {
+        var setHlClassNames = function() {
             $("span.annotator-hl").each(function(){
+
+                // add an id- class
                 var elem$ = $(this)
                 var thisClassName = "id-" + elem$.data().annotation.id
-
-                // add the annotation ID as a class
                 elem$.addClass(thisClassName)
+
+                // add a nested-depth class
+                var numHlParents = elem$.parents(".annotator-hl").length + 1
+                if (numHlParents > 3) numHlParents = 3
+                var nestedDepthClassName = "nested-"+numHlParents
+                elem$.addClass(nestedDepthClassName)
+
             })
 
         }
@@ -322,7 +334,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             function(){ annoBlur(this) }
         )
 
-        addIdNamesToHighlights()
+        setHlClassNames()
         writeAnnotationTexts()
         handleGlobalControls()
         markLongAnnotations()

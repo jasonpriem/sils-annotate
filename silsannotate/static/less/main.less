@@ -71,12 +71,13 @@ body {
    div.annotator-wrapper {
       margin: 50px 50px 50px 100px;
       span.annotator-hl {
-         background: rgba(255, 255, 10, 0.1);
+         &.nested-1 {background: #ffffd2;}
+         &.nested-2 {background: #ffffb9;}
+         &.nested-3 {background: #ffffa8;}
          &.active {
-            background: rgba(255, 10, 0, 0.2);
-            span.annotator-hl {
-//               background: rgba(255, 175, 0, 0.2);
-            }
+            &.nested-1 {background: #ffdede;}
+            &.nested-2 {background: #ffcdcd;}
+            &.nested-3 {background: #ffbfbf;}
          }
       }
       .text-container {
