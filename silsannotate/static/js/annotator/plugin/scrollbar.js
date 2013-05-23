@@ -164,7 +164,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
         var annoBlur = function(e) {
             var annoId = readIdFromClassStr(e.className)
-            delete focusedIds[annoId] 
+            delete focusedIds[annoId]
             activateShortestId()
 
         }

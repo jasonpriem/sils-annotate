@@ -12,7 +12,7 @@ $(document).ready(function(){
         .append("<div id='scrollbar'></div>")
         .append("<div id='menubar'>" +
                         "<div class='submenu enable-annotation'>" +
-                            "<h3>Annotation display</h3>" +
+                            "<h3>Allow annotation</h3>" +
                             "<ul class='enable-disable-annotation'>" +
                                 "<li><a class='on active'>On</a></li>" +
                                 "<li><a class='off ready'>Off</a></li>" +
