@@ -83,6 +83,9 @@ body div.annotator-wrapper span.annotator-hl.nested-2 {
 body div.annotator-wrapper span.annotator-hl.nested-3 {
   background: #ffffa8;
 }
+body div.annotator-wrapper span.annotator-hl.active {
+  background: #ffdede;
+}
 body div.annotator-wrapper span.annotator-hl.active.nested-1 {
   background: #ffdede;
 }

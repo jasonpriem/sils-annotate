@@ -106,12 +106,21 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             annoLi$.find("span.text").append(anno.text)
             annoLi$.hover(
                 function(){
-                    $("."+idClass).addClass("active").parents("ul.sils-annos").addClass("active")
+                    $("."+idClass)
+                        .find(".annotator-hl")
+                        .andSelf()
+                        .addClass("active")
+                        .parents("ul.sils-annos")
+                        .addClass("active")
                     console.log("hoving to activate idClass", idClass)
                 },
                 function(){
-                    $("."+idClass).removeClass("active").parents("ul.sils-anno").removeClass("active")
-                }
+                    $("."+idClass)
+                        .find(".annotator-hl")
+                        .andSelf()
+                        .removeClass("active")
+                        .parents("ul.sils-annos")
+                        .removeClass("active")                }
             )
             return annoLi$
 
@@ -276,6 +285,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 if (numHlParents > 3) numHlParents = 3
                 var nestedDepthClassName = "nested-"+numHlParents
                 elem$.addClass(nestedDepthClassName)
+                console.log(elem$[0].className)
 
             })
 
