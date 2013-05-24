@@ -128,6 +128,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
 
         var annoFocus = function(elems) {
+            if (!enableAnnotation) return false
 
             // add to the focusedIds array
             $(elems).each(function(){
