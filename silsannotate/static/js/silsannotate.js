@@ -35,7 +35,13 @@ $(document).ready(function(){
     var url = window.location.pathname
     var cleanUrl = url.replace("sandbox/", "")
     var textId = cleanUrl.split("/")[2]
-    var userId = window.location.href.match(/user=(\w+)/)[1]
+    var m = window.location.href.match(/user=(\w+)/)
+
+    if (!m){
+      alert("you have to be logged in to view; add '?user=<username>' to the url.")
+    }
+
+    var userId = m[1]
 
     var content = $(document.body).annotator();
     content.annotator('addPlugin', 'Store', {
