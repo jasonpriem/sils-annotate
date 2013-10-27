@@ -38,6 +38,14 @@ Annotator.Plugin.Scrollbar = (function(_super) {
          * functions
          **********************************************************************/
 
+        var showAnnotationCount = function(annotations){
+
+        }
+
+        var showUsersCount = function(annotations) {
+
+        }
+
         var handleGlobalControls = function() {
             $("#menubar a.display-style").click(function(){
                 var newState = _.intersection(displayStyles, this.className.split(" "))[0]

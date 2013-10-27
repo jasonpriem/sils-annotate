@@ -3,11 +3,10 @@ body {
 }
 body div#menubar {
   z-index: 100;
-  width: 200px;
   text-align: right;
   top: 0;
   right: 35px;
-  width: 600px;
+  width: 700px;
   font-family: Helvetica, arial, sans-serif;
   border-top: none;
   position: fixed;
@@ -21,11 +20,13 @@ body div#menubar div.submenu {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding-right: 5px;
+  margin-right: 5px;
   height: 20px;
   float: right;
 }
-body div#menubar div.submenu.enable-annotation {
-  margin-left: 15px;
+body div#menubar div.submenu.count i {
+  padding: 0 5px;
+  color: blue;
 }
 body div#menubar div.submenu ul {
   padding: 0;
