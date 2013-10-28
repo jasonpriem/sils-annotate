@@ -24,9 +24,16 @@ body div#menubar div.submenu {
   height: 20px;
   float: right;
 }
+body div#menubar div.submenu.count {
+  font-size: 12px;
+  vertical-align: 5px;
+  cursor: default;
+}
 body div#menubar div.submenu.count i {
   padding: 0 5px;
   color: blue;
+  font-size: 15px;
+  padding-top: 2px;
 }
 body div#menubar div.submenu ul {
   padding: 0;

@@ -29,11 +29,11 @@ $(document).ready(function(){
                                 "<li><a class='display-style full ready'>Full</a></li>" +
                             "</ul>" +
                       "</div>" +
-                      "<div class='submenu annotations-count count'>" +
+                      "<div class='submenu annotations-count count' title='Total annotations'>" +
                         "<i class='fa fa-comment'></i>" +
                         "<span class='num annotations'></span> " +
                       "</div>" +
-                      "<div class='submenu users-count count'>" +
+                      "<div class='submenu users-count count' title='Total users'>" +
                         "<i class='fa fa-user'></i>" +
                         "<span class='num users'></span>" +
                       "</div>" +

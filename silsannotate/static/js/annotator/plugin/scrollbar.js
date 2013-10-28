@@ -38,11 +38,16 @@ Annotator.Plugin.Scrollbar = (function(_super) {
          * functions
          **********************************************************************/
 
-        var showAnnotationCount = function(annotations){
+        var showCounts = function(){
+          var annos = getAnnotationsFromSetOfHls($("html"))
+          $(".submenu.annotations-count span.num").text(annos.length)
 
-        }
+          var annosByUser = _.groupBy(annos, function(anno){return anno.userId})
 
-        var showUsersCount = function(annotations) {
+          console.log(annosByUser)
+
+          $(".submenu.users-count span.num").text(_.size(annosByUser))
+
 
         }
 
@@ -197,11 +202,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         }
 
         var getAnnotationsFromSetOfHls = function(elem$) {
-            var annos = {}
-            elem$.find(".annotator-hl").each(function(){
-                annos[readIdFromClassStr(this.className)] = $(this).data().annotation
-            })
-            return _.values(annos)
+          var annos = {}
+          elem$.find(".annotator-hl").each(function(){
+              annos[readIdFromClassStr(this.className)] = $(this).data().annotation
+          })
+          return _.values(annos)
         }
 
         var writeAnnotationTexts = function() {
@@ -246,6 +251,8 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                     if (annos.length === 0) $(this).addClass("no-annos")
 
                 })
+
+
         }
 
         var redrawAnnoPane = function(container$) {
@@ -260,6 +267,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 redrawAnnoPane($(this))
             })
             drawScrollbarBlocks()
+            showCounts()
         }
 
 
@@ -299,6 +307,8 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             })
 
         }
+
+
 
         var markLongAnnotations = function() {
             $("li.sils-anno").each(function(){
