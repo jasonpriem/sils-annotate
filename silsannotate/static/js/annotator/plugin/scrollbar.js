@@ -33,6 +33,22 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
 
 
+      // get id of current user; pasted from silsannotate.js
+      var url = window.location.pathname
+      var cleanUrl = url.replace("sandbox/", "")
+      var textId = cleanUrl.split("/")[2]
+      var m = window.location.href.match(/user=(\w+)/)
+
+      if (!m){
+        alert("you have to be logged in to view; add '?user=<username>' to the url.")
+      }
+
+      var userId = m[1]
+
+      console.log("user id!", userId)
+
+
+
 
         /***********************************************************************
          * functions
@@ -42,11 +58,16 @@ Annotator.Plugin.Scrollbar = (function(_super) {
           var annos = getAnnotationsFromSetOfHls($("html"))
           $(".submenu.annotations-count span.num").text(annos.length)
 
+
           var annosByUser = _.groupBy(annos, function(anno){return anno.userId})
-
-          console.log(annosByUser)
-
           $(".submenu.users-count span.num").text(_.size(annosByUser))
+
+
+
+          var annosByThisUser = _.filter(annos, function(anno){
+            return anno.userId == userId
+          })
+          $(".submenu.this-user-annotations-count span.num").text(_.size(annosByThisUser))
 
 
         }
@@ -302,7 +323,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 if (numHlParents > 3) numHlParents = 3
                 var nestedDepthClassName = "nested-"+numHlParents
                 elem$.addClass(nestedDepthClassName)
-                console.log(elem$[0].className)
 
             })
 

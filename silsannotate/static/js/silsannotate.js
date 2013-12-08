@@ -33,6 +33,7 @@ $(document).ready(function(){
 
                       "<div class='submenu users-count count' title='Total users'>" +
                         "<i class='fa fa-group'></i>" +
+//                        "<i class='fa fa-user'></i>" +
                         "<span class='num users'></span>" +
                       "</div>" +
 
@@ -41,7 +42,7 @@ $(document).ready(function(){
                         "<span class='num annotations'></span> " +
                       "</div>" +
 
-                      "<div class='submenu annotations-count count' title='Your annotations'>" +
+                      "<div class='submenu this-user-annotations-count count' title='Your annotations'>" +
                         "<i class='fa fa-comment'></i>" +
                         "<span class='num annotations'></span> " +
                       "</div>" +
