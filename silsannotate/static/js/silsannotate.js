@@ -29,14 +29,23 @@ $(document).ready(function(){
                                 "<li><a class='display-style full ready'>Full</a></li>" +
                             "</ul>" +
                       "</div>" +
-                      "<div class='submenu annotations-count count' title='Total annotations'>" +
+
+
+                      "<div class='submenu users-count count' title='Total users'>" +
+                        "<i class='fa fa-group'></i>" +
+                        "<span class='num users'></span>" +
+                      "</div>" +
+
+                      "<div class='submenu annotations-count count' title='Everyone&apos;s annotations'>" +
+                        "<i class='fa fa-comments'></i>" +
+                        "<span class='num annotations'></span> " +
+                      "</div>" +
+
+                      "<div class='submenu annotations-count count' title='Your annotations'>" +
                         "<i class='fa fa-comment'></i>" +
                         "<span class='num annotations'></span> " +
                       "</div>" +
-                      "<div class='submenu users-count count' title='Total users'>" +
-                        "<i class='fa fa-user'></i>" +
-                        "<span class='num users'></span>" +
-                      "</div>" +
+
                     "</div>")
 
 

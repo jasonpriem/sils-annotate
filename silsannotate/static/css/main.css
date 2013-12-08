@@ -6,7 +6,7 @@ body div#menubar {
   text-align: right;
   top: 0;
   right: 35px;
-  width: 700px;
+  width: 800px;
   font-family: Helvetica, arial, sans-serif;
   border-top: none;
   position: fixed;
@@ -21,18 +21,17 @@ body div#menubar div.submenu {
   border-bottom-right-radius: 5px;
   padding-right: 5px;
   margin-right: 5px;
-  height: 20px;
+  height: 25px;
   float: right;
 }
 body div#menubar div.submenu.count {
-  font-size: 12px;
+  font-size: 18px;
   vertical-align: 5px;
   cursor: default;
 }
 body div#menubar div.submenu.count i {
   padding: 0 5px;
   color: blue;
-  font-size: 15px;
   padding-top: 2px;
 }
 body div#menubar div.submenu ul {
@@ -50,6 +49,9 @@ body div#menubar div.submenu ul li a {
   padding: 4px 3px 3px 4px;
   text-decoration: none;
   cursor: pointer;
+  height: 21px;
+  padding-top: 1px;
+  display: inline-block;
 }
 body div#menubar div.submenu ul li a:hover {
   text-decoration: underline;
