@@ -57,6 +57,8 @@ Annotator.Plugin.Store = (function(_super) {
     var _this = this;
     if (__indexOf.call(this.annotations, annotation) < 0) {
 
+      console.log("storing this annotation: ", annotation)
+
       // try to solve bug causing range-less annotations to be stored and Break Everything
       if (!annotation.ranges.length) return false
 

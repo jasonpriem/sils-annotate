@@ -27,7 +27,7 @@ body div#menubar div.submenu {
 body div#menubar div.submenu.count {
   font-size: 18px;
   vertical-align: 5px;
-  cursor: default;
+  cursor: help;
 }
 body div#menubar div.submenu.count i {
   padding: 0 5px;

@@ -40,11 +40,13 @@ Annotator.Editor = (function(_super) {
     this.element.find('.annotator-save').addClass(this.classes.focus);
     this.checkOrientation();
     this.element.find(":input:first").focus();
-    this.setupDraggables();
+//    this.setupDraggables();
     return this.publish('show');
   };
 
   Editor.prototype.hide = function(event) {
+
+    console.log("hide!")
     util.preventEventDefault(event);
     this.element.addClass(this.classes.hide);
     return this.publish('hide');
@@ -64,10 +66,18 @@ Annotator.Editor = (function(_super) {
 
   Editor.prototype.submit = function(event) {
     var field, _i, _len, _ref;
+
+
+    console.log("submit!")
     util.preventEventDefault(event);
     _ref = this.fields;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       field = _ref[_i];
+
+      console.log("submitting this annotation: ", this.annotation)
+      console.log("submitting this field: ", field.element)
+
+
       field.submit(field.element, this.annotation);
     }
     this.publish('save', [this.annotation]);
@@ -137,77 +147,6 @@ Annotator.Editor = (function(_super) {
     return this.element.find('.' + this.classes.focus).removeClass(this.classes.focus);
   };
 
-  Editor.prototype.setupDraggables = function() {
-    var classes, controls, cornerItem, editor, mousedown, onMousedown, onMousemove, onMouseup, resize, textarea, throttle,
-      _this = this;
-    this.element.find('.annotator-resize').remove();
-    if (this.element.hasClass(this.classes.invert.y)) {
-      cornerItem = this.element.find('.annotator-item:last');
-    } else {
-      cornerItem = this.element.find('.annotator-item:first');
-    }
-    if (cornerItem) {
-      $('<span class="annotator-resize"></span>').appendTo(cornerItem);
-    }
-    mousedown = null;
-    classes = this.classes;
-    editor = this.element;
-    textarea = null;
-    resize = editor.find('.annotator-resize');
-    controls = editor.find('.annotator-controls');
-    throttle = false;
-    onMousedown = function(event) {
-      if (event.target === this) {
-        mousedown = {
-          element: this,
-          top: event.pageY,
-          left: event.pageX
-        };
-        textarea = editor.find('textarea:first');
-        $(window).bind({
-          'mouseup.annotator-editor-resize': onMouseup,
-          'mousemove.annotator-editor-resize': onMousemove
-        });
-        return event.preventDefault();
-      }
-    };
-    onMouseup = function() {
-      mousedown = null;
-      return $(window).unbind('.annotator-editor-resize');
-    };
-    onMousemove = function(event) {
-      var diff, directionX, directionY, height, width;
-      if (mousedown && throttle === false) {
-        diff = {
-          top: event.pageY - mousedown.top,
-          left: event.pageX - mousedown.left
-        };
-        if (mousedown.element === resize[0]) {
-          height = textarea.outerHeight();
-          width = textarea.outerWidth();
-          directionX = editor.hasClass(classes.invert.x) ? -1 : 1;
-          directionY = editor.hasClass(classes.invert.y) ? 1 : -1;
-          textarea.height(height + (diff.top * directionY));
-          textarea.width(width + (diff.left * directionX));
-          if (textarea.outerHeight() !== height) mousedown.top = event.pageY;
-          if (textarea.outerWidth() !== width) mousedown.left = event.pageX;
-        } else if (mousedown.element === controls[0]) {
-          editor.css({
-            top: parseInt(editor.css('top'), 10) + diff.top,
-            left: parseInt(editor.css('left'), 10) + diff.left
-          });
-          mousedown.top = event.pageY;
-          mousedown.left = event.pageX;
-        }
-        throttle = true;
-        return setTimeout(function() {
-          return throttle = false;
-        }, 1000 / 60);
-      }
-    };
-    resize.bind('mousedown', onMousedown);
-    return controls.bind('mousedown', onMousedown);
-  };
 
   return Editor;
 

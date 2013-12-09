@@ -1,3 +1,5 @@
+var editorIsOpen = false
+
 var Annotator, g, util, _Annotator, _ref,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = Object.prototype.hasOwnProperty,
@@ -352,6 +354,10 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.showEditor = function(annotation, location) {
+
+    console.log("show editor!")
+    editorIsOpen = true
+
     this.editor.element.css(location);
     this.editor.load(annotation);
     this.publish('annotationEditorShown', [this.editor, annotation]);
@@ -359,6 +365,10 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.onEditorHide = function() {
+
+    editorIsOpen = false
+
+
     this.publish('annotationEditorHidden', [this.editor]);
     return this.ignoreMouseup = false;
   };
@@ -401,6 +411,9 @@ Annotator = (function(_super) {
 
     if (!enableAnnotation) return true
 
+    if (editorIsOpen) return true
+
+    console.log("checking for end of selectin")
 
     var container, range, _i, _len, _ref;
     this.mouseIsDown = false;
@@ -460,6 +473,8 @@ Annotator = (function(_super) {
   };
 
   Annotator.prototype.onAdderClick = function(event) {
+
+
     var highlights, position, r, ranges;
     if (event != null) event.preventDefault();
     position = this.adder.position();
@@ -486,6 +501,8 @@ Annotator = (function(_super) {
         return _results;
       });
     }
+
+    console.log("onadderclick")
     return this.showEditor(this.createAnnotation(), position);
   };
 
