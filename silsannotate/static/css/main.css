@@ -21,11 +21,11 @@ body div#menubar div.submenu {
   border-bottom-right-radius: 5px;
   padding-right: 5px;
   margin-right: 5px;
-  height: 25px;
+  height: 20px;
   float: right;
 }
 body div#menubar div.submenu.count {
-  font-size: 18px;
+  font-size: 16px;
   vertical-align: 5px;
   cursor: help;
 }
@@ -49,7 +49,7 @@ body div#menubar div.submenu ul li a {
   padding: 4px 3px 3px 4px;
   text-decoration: none;
   cursor: pointer;
-  height: 21px;
+  height: 16px;
   padding-top: 1px;
   display: inline-block;
 }
