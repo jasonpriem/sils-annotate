@@ -1,17 +1,27 @@
 @snippetHeight: 23px;
 
 body {
-   div#menubar {
+
+   .menubar{
       position: fixed;
       z-index: 100;
       text-align: right;
       top: 0;
-      right: 35px;
       width:  800px;
       font-family: Helvetica, arial, sans-serif;
       border-top: none;
-      position: fixed;
       height: 20px;
+
+      &.menubar-left{
+         left: 35px;
+         text-align:left;
+         .submenu {
+            float:left;
+         }
+      }
+      &.menubar-right {
+         right: 35px;
+      }
       div.submenu {
          background: #fff;
          border: 1px solid #333;
@@ -70,6 +80,7 @@ body {
             }
          }
       }
+
       h3 {
          float:left;
          margin: 0 0 0 15px;
@@ -78,7 +89,19 @@ body {
          color: blue;
          font-family: helvetica, arial, sans-serif;
       }
-   }
+
+   } // end menubar
+
+
+
+
+
+
+
+
+
+
+
    line-height: 1.2;
    div.annotator-wrapper {
       margin: 50px 50px 50px 100px;

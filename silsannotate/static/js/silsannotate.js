@@ -12,7 +12,7 @@ $(document).ready(function(){
     // prep the scrollbar:
     $("body")
         .append("<div id='scrollbar'></div>")
-        .append("<div id='menubar'>" +
+        .append("<div id='menubar' class='menubar-right menubar'>" +
                         "<div class='submenu enable-annotation'>" +
                             "<h3>Allow annotation</h3>" +
                             "<ul class='enable-disable-annotation'>" +
@@ -21,7 +21,7 @@ $(document).ready(function(){
                             "</ul>" +
                         "</div>" +
                         "<div class='submenu display-style'>" +
-                            "<h3>Display style</h3>" +
+                            "<h3>Annotation display style</h3>" +
                             "<ul class='display-style'>" +
                                 "<li><a class='display-style hidden ready'>Hidden</a></li>" +
                                 "<li><a class='display-style icons ready'>Icons</a></li>" +
@@ -48,6 +48,16 @@ $(document).ready(function(){
                       "</div>" +
 
                     "</div>")
+      .append("" +
+        "<div id='menubar-left' class='menubar-left menubar'>" +
+          "<div class='submenu enable-highlights'>" +
+            "<h3>Annotations on text</h3>" +
+            "<ul class='enable-disable-highlights'>" +
+                "<li><a class='on active'>On</a></li>" +
+                "<li><a class='off ready'>Off</a></li>" +
+            "</ul>" +
+          "</div>" +
+        "</div>")
 
 
 

@@ -1,18 +1,27 @@
 body {
   line-height: 1.2;
 }
-body div#menubar {
+body .menubar {
+  position: fixed;
   z-index: 100;
   text-align: right;
   top: 0;
-  right: 35px;
   width: 800px;
   font-family: Helvetica, arial, sans-serif;
   border-top: none;
-  position: fixed;
   height: 20px;
 }
-body div#menubar div.submenu {
+body .menubar.menubar-left {
+  left: 35px;
+  text-align: left;
+}
+body .menubar.menubar-left .submenu {
+  float: left;
+}
+body .menubar.menubar-right {
+  right: 35px;
+}
+body .menubar div.submenu {
   background: #fff;
   border: 1px solid #333;
   border-top: none;
@@ -24,26 +33,26 @@ body div#menubar div.submenu {
   height: 20px;
   float: right;
 }
-body div#menubar div.submenu.count {
+body .menubar div.submenu.count {
   font-size: 16px;
   vertical-align: 5px;
   cursor: help;
 }
-body div#menubar div.submenu.count i {
+body .menubar div.submenu.count i {
   padding: 0 5px;
   color: blue;
   padding-top: 2px;
 }
-body div#menubar div.submenu ul {
+body .menubar div.submenu ul {
   padding: 0;
   margin: 0 0 0 5px;
   float: left;
 }
-body div#menubar div.submenu ul li {
+body .menubar div.submenu ul li {
   list-style-type: none;
   float: left;
 }
-body div#menubar div.submenu ul li a {
+body .menubar div.submenu ul li a {
   border-right: 1px solid #fff;
   font-size: 14px;
   padding: 4px 3px 3px 4px;
@@ -53,27 +62,27 @@ body div#menubar div.submenu ul li a {
   padding-top: 1px;
   display: inline-block;
 }
-body div#menubar div.submenu ul li a:hover {
+body .menubar div.submenu ul li a:hover {
   text-decoration: underline;
   color: blue;
 }
-body div#menubar div.submenu ul li a.active {
+body .menubar div.submenu ul li a.active {
   color: #fff;
   background: blue;
   font-weight: bold;
 }
-body div#menubar div.submenu ul li a.active:hover {
+body .menubar div.submenu ul li a.active:hover {
   text-decoration: none;
   cursor: default;
 }
-body div#menubar div.submenu ul li a.ready.disabled {
+body .menubar div.submenu ul li a.ready.disabled {
   color: #ccc;
   cursor: default;
 }
-body div#menubar div.submenu ul li a.ready.disabled:hover {
+body .menubar div.submenu ul li a.ready.disabled:hover {
   text-decoration: none;
 }
-body div#menubar h3 {
+body .menubar h3 {
   float: left;
   margin: 0 0 0 15px;
   font-size: 14px;
