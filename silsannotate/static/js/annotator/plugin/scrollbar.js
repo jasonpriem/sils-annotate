@@ -82,6 +82,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 if ($(this).hasClass("disabled")) return false
                 enableDisableAnnotation()
             })
+
+            $(".submenu.enable-highlights").click(function(){
+              $(".text-container").toggleClass("highlights-hidden")
+              $(this).find("a").toggleClass("active").toggleClass("ready")
+            })
         }
 
 
@@ -92,6 +97,8 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 .toggleClass("active")
                 .toggleClass("ready")
         }
+
+
 
         var changeGlobalDisplayState = function(newState){
 
@@ -257,8 +264,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 redrawAnnoPane(parentContainer$)
 
             })
-
-
 
             textContainters$
                 .append(textContainerContents$)

@@ -127,6 +127,9 @@ body div.annotator-wrapper .text-container.hidden div.anno-display {
 body div.annotator-wrapper .text-container.hidden .annotator-hl {
   background: transparent;
 }
+body div.annotator-wrapper .text-container.highlights-hidden .annotator-hl {
+  background: transparent;
+}
 body div.annotator-wrapper .text-container.icons div.anno-display ul.container-states li.icons {
   color: #333;
   font-weight: bold;
