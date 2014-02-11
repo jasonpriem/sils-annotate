@@ -114,6 +114,9 @@ body div.annotator-wrapper span.annotator-hl.active.nested-2 {
 body div.annotator-wrapper span.annotator-hl.active.nested-3 {
   background: #ffbfbf;
 }
+body div.annotator-wrapper span.annotator-hl.hidden {
+  background: transparent;
+}
 body div.annotator-wrapper blockquote {
   width: 500px;
 }

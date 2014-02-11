@@ -84,7 +84,14 @@ Annotator.Plugin.Scrollbar = (function(_super) {
             })
 
             $(".submenu.enable-highlights").click(function(){
-              $(".text-container").toggleClass("highlights-hidden")
+//              $(".text-container").toggleClass("highlights-hidden")
+              $(".annotator-hl").each(function(){
+                if ($(this).data().annotation.userId != userId) {
+                  $(this).toggleClass("hidden")
+                }
+              })
+
+
               $(this).find("a").toggleClass("active").toggleClass("ready")
             })
         }

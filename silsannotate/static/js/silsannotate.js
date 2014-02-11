@@ -51,10 +51,10 @@ $(document).ready(function(){
       .append("" +
         "<div id='menubar-left' class='menubar-left menubar'>" +
           "<div class='submenu enable-highlights'>" +
-            "<h3>Show highlights</h3>" +
+            "<h3>Show highlights from</h3>" +
             "<ul class='enable-disable-highlights'>" +
-                "<li><a class='on active'>On</a></li>" +
-                "<li><a class='off ready'>Off</a></li>" +
+                "<li><a class='on active'>Everyone</a></li>" +
+                "<li><a class='off ready'>Just me</a></li>" +
             "</ul>" +
           "</div>" +
         "</div>")
