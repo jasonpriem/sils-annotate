@@ -30,6 +30,13 @@ def show_text(text_id):
         return render_template(text_id+".html")
     except TemplateNotFound:
         abort(404, "Whoops, we can't find that...maybe you typed the name wrong?")
+		
+@app.route('/<image_id>')
+def show_text(image_id):
+    try:
+        return render_template(image_id)
+    except TemplateNotFound:
+        abort(404, "Whoops, we can't find that...maybe you typed the name wrong?")
 
 
 @app.route("/store")
