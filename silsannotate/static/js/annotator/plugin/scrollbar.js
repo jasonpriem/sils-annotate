@@ -33,10 +33,44 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
 
 
+      // get id of current user; pasted from silsannotate.js
+      var url = window.location.pathname
+      var cleanUrl = url.replace("sandbox/", "")
+      var textId = cleanUrl.split("/")[2]
+      var m = window.location.href.match(/user=(\w+)/)
+
+      if (!m){
+        alert("you have to be logged in to view; add '?user=<username>' to the url.")
+      }
+
+      var userId = m[1]
+
+      console.log("user id!", userId)
+
+
+
 
         /***********************************************************************
          * functions
          **********************************************************************/
+
+        var showCounts = function(){
+          var annos = getAnnotationsFromSetOfHls($("html"))
+          $(".submenu.annotations-count span.num").text(annos.length)
+
+
+          var annosByUser = _.groupBy(annos, function(anno){return anno.userId})
+          $(".submenu.users-count span.num").text(_.size(annosByUser))
+
+
+
+          var annosByThisUser = _.filter(annos, function(anno){
+            return anno.userId == userId
+          })
+          $(".submenu.this-user-annotations-count span.num").text(_.size(annosByThisUser))
+
+
+        }
 
         var handleGlobalControls = function() {
             $("#menubar a.display-style").click(function(){
@@ -48,6 +82,18 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 if ($(this).hasClass("disabled")) return false
                 enableDisableAnnotation()
             })
+
+            $(".submenu.enable-highlights").click(function(){
+//              $(".text-container").toggleClass("highlights-hidden")
+              $(".annotator-hl").each(function(){
+                if ($(this).data().annotation.userId != userId) {
+                  $(this).toggleClass("hidden")
+                }
+              })
+
+
+              $(this).find("a").toggleClass("active").toggleClass("ready")
+            })
         }
 
 
@@ -58,6 +104,8 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 .toggleClass("active")
                 .toggleClass("ready")
         }
+
+
 
         var changeGlobalDisplayState = function(newState){
 
@@ -189,11 +237,11 @@ Annotator.Plugin.Scrollbar = (function(_super) {
         }
 
         var getAnnotationsFromSetOfHls = function(elem$) {
-            var annos = {}
-            elem$.find(".annotator-hl").each(function(){
-                annos[readIdFromClassStr(this.className)] = $(this).data().annotation
-            })
-            return _.values(annos)
+          var annos = {}
+          elem$.find(".annotator-hl").each(function(){
+              annos[readIdFromClassStr(this.className)] = $(this).data().annotation
+          })
+          return _.values(annos)
         }
 
         var writeAnnotationTexts = function() {
@@ -224,8 +272,6 @@ Annotator.Plugin.Scrollbar = (function(_super) {
 
             })
 
-
-
             textContainters$
                 .append(textContainerContents$)
                 .each(function(){
@@ -238,6 +284,8 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                     if (annos.length === 0) $(this).addClass("no-annos")
 
                 })
+
+
         }
 
         var redrawAnnoPane = function(container$) {
@@ -252,6 +300,7 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 redrawAnnoPane($(this))
             })
             drawScrollbarBlocks()
+            showCounts()
         }
 
 
@@ -286,11 +335,12 @@ Annotator.Plugin.Scrollbar = (function(_super) {
                 if (numHlParents > 3) numHlParents = 3
                 var nestedDepthClassName = "nested-"+numHlParents
                 elem$.addClass(nestedDepthClassName)
-                console.log(elem$[0].className)
 
             })
 
         }
+
+
 
         var markLongAnnotations = function() {
             $("li.sils-anno").each(function(){

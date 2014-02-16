@@ -1,16 +1,18 @@
 var enableAnnotation = true
 $(document).ready(function(){
 
+    // add icons
+  $("head link[rel='stylesheet']").last().after("<link rel='stylesheet' href='//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css' type='text/css' media='screen'>");
 
 
-    // mark text containers
+  // mark text containers
     $("p,h1,h2,h3,h4,h5,h6").addClass("text-container snippets")
 
 
     // prep the scrollbar:
     $("body")
         .append("<div id='scrollbar'></div>")
-        .append("<div id='menubar'>" +
+        .append("<div id='menubar' class='menubar-right menubar'>" +
                         "<div class='submenu enable-annotation'>" +
                             "<h3>Allow annotation</h3>" +
                             "<ul class='enable-disable-annotation'>" +
@@ -19,15 +21,43 @@ $(document).ready(function(){
                             "</ul>" +
                         "</div>" +
                         "<div class='submenu display-style'>" +
-                            "<h3>Display style</h3>" +
+                            "<h3>Annotation display style</h3>" +
                             "<ul class='display-style'>" +
                                 "<li><a class='display-style hidden ready'>Hidden</a></li>" +
                                 "<li><a class='display-style icons ready'>Icons</a></li>" +
                                 "<li><a class='display-style snippets active'>Snippets</a></li>" +
                                 "<li><a class='display-style full ready'>Full</a></li>" +
                             "</ul>" +
-                        "</div>" +
+                      "</div>" +
+
+
+                      "<div class='submenu users-count count' title='Total users'>" +
+                        "<i class='fa fa-group'></i>" +
+//                        "<i class='fa fa-user'></i>" +
+                        "<span class='num users'></span>" +
+                      "</div>" +
+
+                      "<div class='submenu annotations-count count' title='Everyone&apos;s annotations'>" +
+                        "<i class='fa fa-comments'></i>" +
+                        "<span class='num annotations'></span> " +
+                      "</div>" +
+
+                      "<div class='submenu this-user-annotations-count count' title='Your annotations'>" +
+                        "<i class='fa fa-comment'></i>" +
+                        "<span class='num annotations'></span> " +
+                      "</div>" +
+
                     "</div>")
+      .append("" +
+        "<div id='menubar-left' class='menubar-left menubar'>" +
+          "<div class='submenu enable-highlights'>" +
+            "<h3>Show highlights from</h3>" +
+            "<ul class='enable-disable-highlights'>" +
+                "<li><a class='on active'>Everyone</a></li>" +
+                "<li><a class='off ready'>Just me</a></li>" +
+            "</ul>" +
+          "</div>" +
+        "</div>")
 
 
 

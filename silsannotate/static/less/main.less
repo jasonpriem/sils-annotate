@@ -1,18 +1,27 @@
 @snippetHeight: 23px;
 
 body {
-   div#menubar {
+
+   .menubar{
       position: fixed;
       z-index: 100;
-      width: 200px;
       text-align: right;
       top: 0;
-      right: 35px;
-      width:  600px;
+      width:  800px;
       font-family: Helvetica, arial, sans-serif;
       border-top: none;
-      position: fixed;
       height: 20px;
+
+      &.menubar-left{
+         left: 35px;
+         text-align:left;
+         .submenu {
+            float:left;
+         }
+      }
+      &.menubar-right {
+         right: 35px;
+      }
       div.submenu {
          background: #fff;
          border: 1px solid #333;
@@ -21,9 +30,19 @@ body {
          border-bottom-left-radius: 5px;
          border-bottom-right-radius: 5px;
          padding-right:5px;
+         margin-right: 5px;
          height: 20px;
          float:right;
-         &.enable-annotation { margin-left:15px;}
+         &.count {
+            font-size: 16px;
+            vertical-align: 5px;
+            cursor: help;
+            i {
+               padding: 0 5px;
+               color:  blue;
+               padding-top:2px;
+            }
+         }
          ul {
             padding: 0;
             margin: 0 0 0 5px;
@@ -37,6 +56,9 @@ body {
                   padding: 4px 3px 3px 4px;
                   text-decoration: none;
                   cursor: pointer;
+                  height: 16px;
+                  padding-top: 1px;
+                  display: inline-block;
                   &:hover {
                      text-decoration: underline;
                      color: blue;
@@ -58,6 +80,7 @@ body {
             }
          }
       }
+
       h3 {
          float:left;
          margin: 0 0 0 15px;
@@ -66,7 +89,19 @@ body {
          color: blue;
          font-family: helvetica, arial, sans-serif;
       }
-   }
+
+   } // end menubar
+
+
+
+
+
+
+
+
+
+
+
    line-height: 1.2;
    div.annotator-wrapper {
       margin: 50px 50px 50px 100px;
@@ -80,6 +115,7 @@ body {
             &.nested-2 {background: #ffcdcd;}
             &.nested-3 {background: #ffbfbf;}
          }
+         &.hidden {background:transparent;}
       }
       blockquote {
          width:  500px;
@@ -91,6 +127,10 @@ body {
 
          &.hidden {
             div.anno-display {display:none;}
+            .annotator-hl {background:transparent;}
+         }
+
+         &.highlights-hidden {
             .annotator-hl {background:transparent;}
          }
 
